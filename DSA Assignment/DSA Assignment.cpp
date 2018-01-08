@@ -6,7 +6,7 @@
 
 int main()
 {
-	cout << 'hello' << endl;
+	cout << 'hello i m shiqi' << endl;
     return 0;
 }
 
