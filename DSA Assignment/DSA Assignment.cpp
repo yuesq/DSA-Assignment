@@ -2,11 +2,15 @@
 //
 
 #include "stdafx.h"
+#include <iostream>
+using namespace std;
+
 
 
 int main()
 {
-	cout << 'hello i m shiqi' << endl;
+
+	system("PAUSE");
     return 0;
 }
 
