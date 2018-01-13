@@ -9,11 +9,13 @@ using namespace std;
 #include "BST.h"
 BST bst;
 ItemType value;
+int dataArray[] = { 55, 28, 87, 32, 90, 16, 45, 79, 66, 30 };
 
 void displayMenu();
 void opt1();
 void opt2();
 void opt3();
+
 
 /*void opt4();
 void opt5();
@@ -21,9 +23,25 @@ void opt6();*/
 
 int main()
 {
-	int n;
+	//s is an integer given by the user
+	int s;
 	cout << "Enter integer to initialise tree: ";
-	cin >> n;
+	cin >> s;
+	//validating if not an integer
+	while (cin.fail() || s<0)
+	{
+		cout << "Input must be valid. Please enter a valid number: ";
+		cin.clear();
+		cin.ignore();
+		cin >> s;
+	}
+
+	 //m is the sum of all node values in the bst
+	/*int m;
+	for (int i = 1; i <= s; i++)
+		m += i;
+	cout << "sum is = " << m << endl;*/
+
 	displayMenu();
 
 	int opt;
