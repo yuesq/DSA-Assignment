@@ -1,12 +1,14 @@
 // BST.cpp
 
-#include<iostream>
-using namespace std;
 #include "stdafx.h"
+#include<iostream>
 #include <string>
+using namespace std;
 #include <cstddef>  // for NULL
 #include <new>      // for bad_alloc
+#include <algorithm>
 #include "BST.h"
+
 
 // constructor
 BST::BST()
@@ -145,7 +147,7 @@ void BST::remove(BinaryNode* &t, ItemType value)
 // traverse the binary search tree in inorder
 void BST::inorder()
 {
-	if (isEmoty())
+	if (isEmpty())
 		cout << "No item found" << endl;
 	else
 		inorder(root);
@@ -163,7 +165,7 @@ void BST::inorder(BinaryNode* t)
 // traverse the binary search tree in preorder
 void BST::preorder()
 {
-	if (isEmoty())
+	if (isEmpty())
 		cout << "No item found" << endl;
 	else
 		preorder(root);
@@ -182,7 +184,7 @@ void BST::preorder(BinaryNode* t)
 // traverse the binary search tree in postorder
 void BST::postorder()
 {
-	if (isEmoty())
+	if (isEmpty())
 		cout << "No item found" << endl;
 	else
 		postorder(root);
@@ -254,7 +256,7 @@ bool BST::isBalanced(BinaryNode *t)
 }
 
 // check if the binary search tree is empty
-bool BST::isEmoty()
+bool BST::isEmpty()
 {
 	return (root == NULL);
 }

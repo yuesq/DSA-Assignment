@@ -47,7 +47,7 @@ public:
 	int countNodes(BinaryNode* t);
 
 	// check if the binary search tree is empty
-	bool isEmoty();
+	bool isEmpty();
 
 	// check if the binary search tree is balanced
 	bool isBalanced();

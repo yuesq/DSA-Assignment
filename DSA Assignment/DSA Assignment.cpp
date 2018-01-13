@@ -14,16 +14,36 @@ void displayMenu();
 void opt1();
 void opt2();
 void opt3();
-void opt4();
+
+/*void opt4();
 void opt5();
-void opt6();
+void opt6();*/
 
 int main()
 {
 	int n;
-	cout << "Enter integer to initialise tree: " << endl;
+	cout << "Enter integer to initialise tree: ";
 	cin >> n;
-	void displayMenu();
+	displayMenu();
+
+	int opt;
+	cout << "Enter option: ";
+	cin >> opt;
+
+	if (opt == 1)
+	{
+		opt1();
+	}
+
+	else if (opt == 2)
+	{
+		opt2();
+	}
+
+	else if (opt == 3)
+	{
+		opt3();
+	}
 
 	system("PAUSE");
     return 0;
@@ -41,12 +61,11 @@ void displayMenu()
 	cout << "[6] Display the tree" << endl;
 	cout << "[0] Exit" << endl;
 	cout << "============================================" << endl;
-	cout << "Enter option: " << endl;
 }
 
 void opt1()	//search for a value
 {
-	cout << "Enter a value to search: " << endl;
+	cout << "Enter a value to search: ";
 	cin >> value;
 	BinaryNode* p = bst.search(value);
 	if (p != NULL)
@@ -58,7 +77,7 @@ void opt1()	//search for a value
 void opt2() //add a value
 {
 	int v;
-	cout << "Enter value to add: " << endl;
+	cout << "Enter value to add: ";
 	cin >> v;
 	bst.insert(v);
 }
@@ -66,12 +85,12 @@ void opt2() //add a value
 void opt3() //remove a value
 {
 	int v;
-	cout << "Enter value to delete: " << endl;
+	cout << "Enter value to delete: ";
 	cin >> v;
 	bst.remove(v);
 }
 
-void opt4() //display values in ascending order 
+/*void opt4() //display values in ascending order 
 {
 
 }
@@ -85,6 +104,6 @@ void opt6() //display the tree
 {
 
 }
-
+*/
 
 
