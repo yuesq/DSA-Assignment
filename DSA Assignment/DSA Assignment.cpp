@@ -41,28 +41,36 @@ int main()
 	for (int i = 1; i <= s; i++)
 		m += i;
 	cout << "sum is = " << m << endl;*/
-
-	displayMenu();
-
-	int opt;
-	cout << "Enter option: ";
-	cin >> opt;
-
-	if (opt == 1)
+	while (true)
 	{
-		opt1();
-	}
+		displayMenu();
 
-	else if (opt == 2)
-	{
-		opt2();
-	}
+		int opt;
+		cout << "Enter option: ";
+		cin >> opt;
 
-	else if (opt == 3)
-	{
-		opt3();
-	}
+		if (opt == 1)
+		{
+			opt1();
+		}
 
+		else if (opt == 2)
+		{
+			opt2();
+		}
+
+		else if (opt == 3)
+		{
+			opt3();
+		}
+
+		else if (opt == 0)
+		{
+			cout << "Thank you!" << endl;
+		}
+		else
+			cout << "Sorry, you have entered an invalid option" << endl;
+	}
 	system("PAUSE");
     return 0;
 }
