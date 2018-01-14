@@ -11,6 +11,8 @@ BST bst;
 ItemType value;
 int dataArray[] = { 55, 28, 87, 32, 90, 16, 45, 79, 66, 30 };
 
+int main();
+
 void displayMenu();
 void opt1();
 void opt2();
@@ -27,7 +29,8 @@ int main()
 	int s;
 	cout << "Enter integer to initialise tree: ";
 	cin >> s;
-	//validating if not an integer
+
+	//validation if s not an integer
 	while (cin.fail() || s<0)
 	{
 		cout << "Input must be valid. Please enter a valid number: ";
@@ -36,11 +39,16 @@ int main()
 		cin >> s;
 	}
 
-	 //m is the sum of all node values in the bst
-	/*int m;
-	for (int i = 1; i <= s; i++)
+	//m is the sum of all node values in the bst
+	int m = 0;
+	int i;
+
+	for (i = 1 ; m <= s; i++)
 		m += i;
-	cout << "sum is = " << m << endl;*/
+	m += i;
+	cout << "sum is = " << m << endl;
+
+
 	while (true)
 	{
 		displayMenu();
@@ -67,11 +75,13 @@ int main()
 		else if (opt == 0)
 		{
 			cout << "Thank you!" << endl;
+			break;
 		}
 		else
 			cout << "Sorry, you have entered an invalid option" << endl;
+			
 	}
-	system("PAUSE");
+	system ("PAUSE");
     return 0;
 }
 

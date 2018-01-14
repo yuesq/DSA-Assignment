@@ -234,22 +234,14 @@ bool BST::isBalanced()
 	return isBalanced(root);
 }
 
-bool BST::isBalanced(BinaryNode *t)
+bool BST::isBalanced(BinaryNode* t)
 {
 	if (t != NULL)
 	{
-		if (getHeight(t) < 4)
-		{
-			int leftHeight = getHeight(t->left);
-			int rightHeight = getHeight(t->right);
-
-			if (abs(leftHeight - rightHeight) <= 1)
-				return true;
-			else
-				return false;
-		}
-		else
-			return (isBalanced(t->left) && isBalanced(t->right));
+		int leftHeight = getHeight(t->left);
+		int rightHeight = getHeight(t->right);
+		bool balanced = (abs(leftHeight - rightHeight) <= 1);
+		return (balanced && isBalanced(t->left) && isBalanced(t->right));
 	}
 	else
 		return true;
