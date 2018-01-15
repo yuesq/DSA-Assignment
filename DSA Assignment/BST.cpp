@@ -16,6 +16,39 @@ BST::BST()
 	root = NULL;
 }
 
+void BST::initialise(ItemType value)
+{
+	BinaryNode *root = new BinaryNode;
+	root->item = value;
+	root->left = NULL;
+	root->right = NULL;
+	return initialise(root, value);
+}
+
+void BST::initialise(BinaryNode* &root, ItemType value)
+{
+	//m is the sum of all node values in the bst
+	int m = 0;
+
+	//i is the iteration
+	int i;
+	
+	//dataArray is an array of the values to be put in the BST
+	int dataArray[] = { 0 };
+
+	for (i = 1; m <= value; i++)
+
+		//insert values into array
+		dataArray[i-1] = i;
+		m += i;
+
+	//get the smallest possible integer greater than m
+	m += i;
+	cout << "sum is = " << m << endl;
+
+
+}
+
 // search an item in the binary search tree
 BinaryNode* BST::search(ItemType value)
 {
@@ -114,7 +147,9 @@ void BST::remove(BinaryNode* &t, ItemType value)
 			// -----------------------  case 2 : node has only 1 child  ----------------
 			if (current->left == NULL)
 			{
-				if (isLeftChild)
+				if (current == t)
+					t = current->right;
+				else if (isLeftChild)
 					parent->left = current->right;
 				else
 					parent->right = current->right;;
@@ -122,7 +157,9 @@ void BST::remove(BinaryNode* &t, ItemType value)
 			else
 				if (current->right == NULL)
 				{
-					if (isLeftChild)
+					if (current == t)
+						t = current->left;
+					else if (isLeftChild)
 						parent->left = current->left;
 					else
 						parent->right = current->left;;

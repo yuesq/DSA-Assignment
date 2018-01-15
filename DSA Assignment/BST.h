@@ -18,6 +18,10 @@ public:
 	BinaryNode* search(ItemType value);
 	BinaryNode* search(BinaryNode* root, ItemType value);
 
+	//initialise a binary search tree
+	void initialise(ItemType value);
+	void initialise(BinaryNode* &root, ItemType value);
+
 	// insert an item to the binary search tree
 	void insert(ItemType item);
 	void insert(BinaryNode* &root, ItemType item);

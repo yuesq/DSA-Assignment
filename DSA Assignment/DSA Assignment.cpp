@@ -1,3 +1,14 @@
+//Jessica Das Roy 
+//S10171178
+//ISF02
+//PO2
+
+//Yue Shiqi
+//S10171209
+//ISF02
+//PO2
+
+
 // DSA Assignment.cpp : Defines the entry point for the console application.
 
 
@@ -9,7 +20,6 @@ using namespace std;
 #include "BST.h"
 BST bst;
 ItemType value;
-int dataArray[] = { 55, 28, 87, 32, 90, 16, 45, 79, 66, 30 };
 
 int main();
 
@@ -30,6 +40,7 @@ int main()
 	cout << "Enter integer to initialise tree: ";
 	cin >> s;
 
+
 	//validation if s not an integer
 	while (cin.fail() || s<0)
 	{
@@ -38,15 +49,6 @@ int main()
 		cin.ignore();
 		cin >> s;
 	}
-
-	//m is the sum of all node values in the bst
-	int m = 0;
-	int i;
-
-	for (i = 1 ; m <= s; i++)
-		m += i;
-	m += i;
-	cout << "sum is = " << m << endl;
 
 
 	while (true)
