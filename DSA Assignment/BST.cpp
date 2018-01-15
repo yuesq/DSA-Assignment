@@ -9,6 +9,14 @@ using namespace std;
 #include <algorithm>
 #include "BST.h"
 
+//m is the sum of all node values in the bst
+int m = 0;
+
+//i is the iteration
+int i;
+
+//dataArray is an array of the values to be put in the BST
+int dataArray[] = { 0 };
 
 // constructor
 BST::BST()
@@ -16,25 +24,20 @@ BST::BST()
 	root = NULL;
 }
 
+
+//initialise a data array of values
 void BST::initialise(ItemType value)
 {
-	BinaryNode *root = new BinaryNode;
-	root->item = value;
-	root->left = NULL;
-	root->right = NULL;
+	BinaryNode *t = new BinaryNode;
+	t->item = value;
+	t->left = NULL;
+	t->right = NULL;
 	return initialise(root, value);
 }
 
+//put the values of the array into a tree
 void BST::initialise(BinaryNode* &root, ItemType value)
 {
-	//m is the sum of all node values in the bst
-	int m = 0;
-
-	//i is the iteration
-	int i;
-	
-	//dataArray is an array of the values to be put in the BST
-	int dataArray[] = { 0 };
 
 	for (i = 1; m <= value; i++)
 
@@ -42,11 +45,33 @@ void BST::initialise(BinaryNode* &root, ItemType value)
 		dataArray[i-1] = i;
 		m += i;
 
-	//get the smallest possible integer greater than m
+	//get the smallest possible integer greater than sum
 	m += i;
 	cout << "sum is = " << m << endl;
+	convert(dataArray, dataArray[0], dataArray[i], root);
 
+}
 
+//convert array into binary search tree
+void BST::convert(int arr[], int start, int end, BinaryNode* &root)
+{
+	if (start > end)
+		return;
+	
+	//create int for mid of array
+	int mid;
+
+	end = end + (((end-start)%2)?1:0);
+	mid = (start + end) / 2;
+
+	BinaryNode *t = new BinaryNode;
+	t->item = dataArray[mid];
+
+	//create left subtree
+	convert(dataArray, start, mid-1, t->left);
+
+	//create right subtree
+	convert(dataArray, mid + 1, end, t->right);
 }
 
 // search an item in the binary search tree

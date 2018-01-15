@@ -48,6 +48,7 @@ int main()
 		cin.clear();
 		cin.ignore();
 		cin >> s;
+		bst.initialise(s);
 	}
 
 
