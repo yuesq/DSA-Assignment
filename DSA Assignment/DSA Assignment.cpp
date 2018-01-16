@@ -107,7 +107,7 @@ void opt1()	//search for a value
 	cout << "Enter a value to search: ";
 	cin >> value;
 	BinaryNode* p = bst.search(value);
-	if (p != NULL)
+	if (p!= NULL)
 		cout << "Found" << endl;
 	else
 		cout << "Not Found" << endl;

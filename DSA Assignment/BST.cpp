@@ -28,50 +28,55 @@ BST::BST()
 //initialise a data array of values
 void BST::initialise(ItemType value)
 {
-	BinaryNode *t = new BinaryNode;
-	t->item = value;
-	t->left = NULL;
-	t->right = NULL;
-	return initialise(root, value);
-}
-
-//put the values of the array into a tree
-void BST::initialise(BinaryNode* &root, ItemType value)
-{
+	//m is the sum of all node values in the bst
+	int m = 0;
+	int i;
 
 	for (i = 1; m <= value; i++)
-
-		//insert values into array
-		dataArray[i-1] = i;
+	{
+		// insert values into array
+		dataArray[i - 1] = i;
+		cout << "value in array = " << i << endl;
 		m += i;
+	}
 
 	//get the smallest possible integer greater than sum
+	dataArray[i - 1] = 1;
+	cout << "value in array = " << i << endl;
 	m += i;
 	cout << "sum is = " << m << endl;
-	convert(dataArray, dataArray[0], dataArray[i], root);
-
+	
 }
 
 //convert array into binary search tree
-void BST::convert(int arr[], int start, int end, BinaryNode* &root)
+void BST::convert(int (arr[]), int start, int end, BinaryNode* &root)
 {
+	BinaryNode *t = new BinaryNode;
+	t->item = ((1 + i) / 2);
+	t->left = NULL;
+	t->right = NULL;
+	convert(dataArray, dataArray[0], dataArray[i - 1], t);
+
+	//base case
 	if (start > end)
 		return;
 	
 	//create int for mid of array
 	int mid;
 
-	end = end + (((end-start)%2)?1:0);
+	//find middle element
+	//end = end + (((end-start)%2)?1:0);
 	mid = (start + end) / 2;
 
 	BinaryNode *t = new BinaryNode;
 	t->item = dataArray[mid];
 
 	//create left subtree
-	convert(dataArray, start, mid-1, t->left);
+	convert(dataArray, start, mid-1, root->left);
 
 	//create right subtree
-	convert(dataArray, mid + 1, end, t->right);
+	convert(dataArray, mid + 1, end, root->right);
+
 }
 
 // search an item in the binary search tree
@@ -223,6 +228,8 @@ void BST::inorder(BinaryNode* t)
 		cout << t->item << endl;
 		inorder(t->right);
 	}
+	else
+		return;					//NEW LINE
 }
 // traverse the binary search tree in preorder
 void BST::preorder()
