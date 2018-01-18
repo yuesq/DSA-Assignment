@@ -33,34 +33,14 @@ void BST::initialise(ItemType value)
 
 	for (int i = 1; m <= value; i++)
 	{
-		// insert values into array
-		dataArray[i - 1] = i;
-		cout << "value in array = " << dataArray[i-1] << endl;
+		// insert values into tree
+		cout << "value in tree = " << i << endl;
+		insert(i);
 		m += i;
 	}
 
 	cout << "sum is = " << m << endl;
 
-	//create int for mid of array
-	//end = end + (((end-start)%2)?1:0);
-	int start = dataArray[0];
-	int end = dataArray[i - 1];
-	int mid = (start + end) / 2;
-
-	//assign mid value to be root value
-	BinaryNode* t = new BinaryNode;
-	t->item = mid;
-	t->left = NULL;
-	t->right = NULL;
-	root = t;
-
-	for (int i = 1; i <= (end - 1); i++)
-	{
-		if (i == mid)
-			continue;
-		else
-			insert(dataArray[i-1]);
-	};
 }
 
 //convert array into binary search tree
@@ -85,36 +65,46 @@ BinaryNode* BST::convert(int (arr[]), int start, int end, BinaryNode* &root)
 // search an item in the binary search tree
 BinaryNode* BST::search(ItemType value)
 {
-	if (root !=0)
+	if (root != 0)
 	{
-		cout << "root" << endl;
+		cout << "found root = "<< root->item << endl;
 		return search(root, value);
 	}
 }
 
-BinaryNode* BST::search(BinaryNode* t, ItemType value)
+BinaryNode* BST::search(BinaryNode* root, ItemType value)
 {
-	if (t == NULL)	// item not found
+	if (root == NULL)	// item not found
 	{
 		cout << "Not found" << endl;
 		return NULL;
 	}
+	else if (root->item == value) //item found
+		return root;
+
+	//1. if value>item but not in tree
+	//   it will print the path it took to find the value 
+	//2. then print L/R (based on which side of the node is empty)
+	//3. then print "not found"
+
+	//1. if value> last item of subtree
+	//   it will print all the Rs and Ls needed 
+	//2. then print another L/R
+	//3. then print "not found"
 	else
 	{
-		if (t->item == value)	// item found
-			return t;
-		else
-			if (value < t->item)// search in left subtree
-			{
-				cout << "L" << endl;
-				return search(t->left, value);
-			}
-			else // search in right subtree
-			{
-				cout << "R" << endl;
-				return search(t->right, value);
-			}
+		if (value < root->item)// search in left subtree
+		{
+			cout << "L" << endl;
+			return search(root->left, value);
+		}
+		else // search in right subtree
+		{
+			cout << "R" << endl;
+			return search(root->right, value);
+		}
 	}
+	
 }
 
 // insert an item to the binary search tree

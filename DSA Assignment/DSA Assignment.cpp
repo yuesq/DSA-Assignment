@@ -98,6 +98,7 @@ int main()
 			cout << "Thank you!" << endl;
 			break;
 		}
+
 		else
 			cout << "Sorry, you have entered an invalid option" << endl;
 			
