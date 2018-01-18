@@ -28,8 +28,8 @@ void opt1();
 void opt2();
 void opt3();
 void opt4();
-/*void opt5();
-void opt6();*/
+//void opt5();
+void opt6();
 
 int main()
 {
@@ -87,12 +87,12 @@ int main()
 		{
 			opt5();
 		}
-
+		*/
 		else if (opt == 6)
 		{
 			opt6();
 		}
-		*/
+		//*/
 		else if (opt == 0)
 		{
 			cout << "Thank you!" << endl;
@@ -153,15 +153,15 @@ void opt4() //display values in ascending order
 /*
 void opt5() //display value in node k 
 {
-	
-}
-
-void opt6() //display the tree
-{
-
 }
 
 */
+void opt6() //display the tree
+{
+	bst.display();
+}
+
+
 
 //MIGHT USE IN THE FUTURE
 //IDK

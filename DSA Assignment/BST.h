@@ -59,4 +59,11 @@ public:
 	bool isBalanced();
 	bool isBalanced(BinaryNode *t);
 
+	// look for node K
+	BinaryNode* nodeK(ItemType item);
+	BinaryNode* nodeK(BinaryNode* root, ItemType item);
+
+	// display the tree
+	void display();
+	void display(BinaryNode *ptr, int level);
 };

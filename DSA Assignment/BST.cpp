@@ -328,6 +328,62 @@ bool BST::isEmpty()
 	return (root == NULL);
 }
 
+/*//look for node k
+BinaryNode* BST::nodeK(ItemType value)
+{
+	if (isEmpty())
+		return NULL;
+	else
+	{
+		BinaryNode* newNode = new BinaryNode;
+		newNode->item = value;
+		BinaryNode *ptrNode = new BinaryNode;
+		ptrNode = search(value);
+		if (ptrNode == NULL)
+		{
+			cout << "Not found." << endl;
+			return NULL;
+		}
+
+		else (ptrNode == root)
+		{
+			cout << "Found. " << endl;
+			return root;
+		}
+	}
+}
+
+BinaryNode* BST::nodeK(BinaryNode* root, ItemType value)
+{
+	
+}
+*/
+
+void BST::display()
+{
+	int level = getHeight();
+	if (level == 0)
+	{
+		cout << "There is no tree to be displayed. " << endl;
+	}
+	display(root, level);
+}
+
+void BST::display(BinaryNode *ptr, int level)
+{
+	int i;
+	if (ptr != NULL)
+	{
+		display(ptr->right, level + 1);
+		printf("\n");
+		if (ptr == root)
+			cout << "Root -> ";
+		for (i = 0; i < level && ptr != root; i++)
+			cout << "        ";
+		cout << ptr->item;
+		display(ptr->left, level + 1);
+	}
+}
 
 //MIGHT USE IN THE FUTURE
 //IDK
