@@ -3,11 +3,16 @@
 #include "stdafx.h"
 #include<iostream>
 #include <string>
-using namespace std;
+#include <cmath>
 #include <cstddef>  // for NULL
 #include <new>      // for bad_alloc
 #include <algorithm>
 #include "BST.h"
+
+using namespace std;
+
+#define max(x,y) ((x > y) ? x : y)
+#define min(x,y) ((x < y) ? x : y)
 
 //m is the sum of all node values in the bst
 int m = 0;
@@ -289,6 +294,23 @@ int BST::getHeight(BinaryNode* t)
 		return 1 + max(getHeight(t->left), getHeight(t->right));
 }
 
+//compute the height difference between the left and right subtree
+int BST::heightDiff()
+{
+	if (isEmpty())
+	{
+		cout << "Your tree is empty." << endl;
+		return 0;
+	}
+	else
+		return heightDiff(root);
+}
+
+int BST::heightDiff(BinaryNode* t)
+{
+	return (getHeight(t->left) - getHeight(t->right));
+}
+
 // count the number of nodes in the binary search tree
 int BST::countNodes()
 {
@@ -392,64 +414,31 @@ void BST::display(BinaryNode *ptr, int level)
 			gap += "   ";
 	}
 
-	string levelNodes = 
+	string levelNodes = printLevel(root, i, gap);
+	cout << levelNodes << endl;
 	*/
 }
 
+//get the height difference between the left and right subtree
+int BST::heightDiff()
+{
+	if (isEmpty())
+	{
+		cout << "Your tree is empty." << endl;
+		return 0;
+	}
+	else
+		return heightDiff(root);
+}
 
+int BST::heightDiff(BinaryNode* t)
+{
+	return (getHeight(t->left) - getHeight(t->right));
+}
 
 //MIGHT USE IN THE FUTURE
 //IDK
 /*
-#include "stdafx.h"
-#include<iostream>
-#include<cstdio>
-#include<sstream>
-#include<algorithm>
-#include <cmath>
-using namespace std;
-
-#include <cstddef>  // for NULL
-#include <new>      // for bad_alloc
-#include "BinaryNode.h"
-#include "BST.h"
-
-#define max(x,y) ((x > y) ? x : y)
-#define min(x,y) ((x < y) ? x : y)
-
-
-// constructor
-BST::BST()
-{
-root = NULL;
-}
-
-//initialise function
-BinaryNode* BST::initialise(ItemType value)
-{
-if (int(value) == true)
-{
-initialise(root, value);
-return root;
-}
-else
-return NULL;
-}
-
-BinaryNode* BST::initialise(BinaryNode* &root, ItemType value)
-{
-// m is the sum of numbers
-int m = 0;
-
-for (int i = 1; m <= (value); i++)
-{
-cout << "value: " << i;
-m += 1;
-insert(i);
-return root;
-}
-}
-
 //insert function
 BinaryNode* BST::insert(ItemType item)
 {
@@ -494,238 +483,12 @@ ptrNode->right = t;
 return ptrNode;
 }
 
-// delete an item from the binary search tree
-void BST::remove(ItemType value)
-{
-remove(root, value);
-}
-
-void BST::remove(BinaryNode* &t, ItemType value)
-{
-// search for the node to be deleted
-
-BinaryNode* current = t;
-BinaryNode* parent = NULL;
-bool isLeftChild = false;
-bool found = false;
-while ((!found) && (current != NULL))
-{
-if (value == current->item)
-{
-found = true;
-}
-else
-{
-parent = current;
-if (value < current->item)
-{
-current = current->left;	// go to left subtree
-isLeftChild = true;
-}
-else
-{
-current = current->right;	// go to right subtree
-isLeftChild = false;
-}
-}
-}
-
-if (found)
-{
-// -----------------------  case 1 : node is a leaf ------------------------
-if (current->left == NULL && current->right == NULL)
-{
-if (current == t)	// node to be deleted is a root
-t = NULL;
-else
-if (isLeftChild)
-parent->left = NULL;
-else
-parent->right = NULL;
-}
-else
-// -----------------------  case 2 : node has only 1 child  ----------------
-if (current->left == NULL)
-{
-if (current == t)
-t = current->right;
-else if (isLeftChild)
-parent->left = current->right;
-else
-parent->right = current->right;;
-}
-else
-if (current->right == NULL)
-{
-if (current == t)
-t = current->left;
-else if (isLeftChild)
-parent->left = current->left;
-else
-parent->right = current->left;;
-}
-else
-// -----------------------  case 3 : node has 2 children  ------------------
-{
-// find the successor ( rightmost child in the node’s left subtree)
-BinaryNode* successor = current->left;
-while (successor->right != NULL)
-successor = successor->right;
-// replace the node’s item with that of the successor
-int n = successor->item;
-// delete the successor (either case 1 or case 2)
-remove(t, n);
-// replace the node’s item with that of the successor
-current->item = n;
-}
-}
-}
-
-//inorder traversal
-// traverse the binary search tree in inorder
-void BST::inorder()
-{
-if (isEmpty())
-cout << "No item found" << endl;
-else
-inorder(root);
-}
-
-void BST::inorder(BinaryNode* t)
-{
-if (isEmpty())
-return;		//new line
-else
-{
-inorder(root->left);
-cout << root->item << endl;
-inorder(root->right);
-}
-
-}
-
-//preorder traversal
-//traverse the tree in preoder
-void BST::preorder()
-{
-if (isEmpty())
-{
-cout << "No item found" << endl;
-return;
-}
-else
-inorder(root);
-}
-
-void BST::preorder(BinaryNode* t)
-{
-if (root != NULL)
-{
-cout << "Data: ";
-cout << root->item << endl;
-preorder(root->left);
-preorder(root->right);
-}
-}
-
-//postorder
-//traverse the tree in post order
-void BST::postorder()
-{
-if (isEmpty())
-{
-cout << "No item found. " << endl;
-}
-else
-postorder(root);
-}
-
-void BST::postorder(BinaryNode* t)
-{
-if (t != NULL)
-{
-postorder(t->left);
-postorder(t->right);
-cout << t->item << endl;
-}
-}
-
-//get height of binary search tree
-int BST::getHeight()
-{
-if (isEmpty())
-{
-cout << "Your tree is empty." << endl;
-return 0;
-}
-else
-return getHeight(root);
-}
-
-int BST::getHeight(BinaryNode* t)
-{
-if (t != NULL)
-return 1 + max(getHeight(t->left), getHeight(t->right));
-else
-return 0;
-}
-
-//get the height difference between the left and right subtree
-int BST::heightDiff()
-{
-if (isEmpty())
-{
-cout << "Your tree is empty." << endl;
-return 0;
-}
-else
-return heightDiff(root);
-}
-
-int BST::heightDiff(BinaryNode* t)
-{
-return (getHeight(t->left) - getHeight(t->right));
-}
-
-
-// count the number of nodes in the binary search tree
-int BST::countNodes()
-{
-return countNodes(root);
-}
-
 int BST::countNodes(BinaryNode* t)
 {
 if (t == NULL)
 return 0;
 else
 return 1 + countNodes(t->left) + countNodes(t->right);
-}
-
-// check if the binary search tree is balanced
-bool BST::isBalanced()
-{
-return isBalanced(root);
-}
-
-bool BST::isBalanced(BinaryNode* t)
-{
-if (t != NULL)
-{
-int leftHeight = getHeight(t->left);
-int rightHeight = getHeight(t->right);
-bool balanced = (abs(leftHeight - rightHeight) <= 1);
-return (balanced && isBalanced(t->left) && isBalanced(t->right));
-}
-else
-return true;
-}
-
-
-//check if empty tree
-bool BST::isEmpty()
-{
-return (root == NULL);
 }
 
 */

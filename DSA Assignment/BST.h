@@ -48,6 +48,10 @@ public:
 	int getHeight();
 	int getHeight(BinaryNode* t);
 
+	//compute the height difference between the subtrees
+	int heightDiff();
+	int heightDiff(BinaryNode* t);
+
 	// count the number of nodes in the binary search tree
 	int countNodes();
 	int countNodes(BinaryNode* t);
