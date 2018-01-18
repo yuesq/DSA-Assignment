@@ -72,9 +72,11 @@ BinaryNode* BST::search(ItemType value)
 {
 	if (root != 0)
 	{
-		cout << "found root = "<< root->item << endl;
+		cout << "found root = " << root->item << endl;
 		return search(root, value);
 	}
+	else
+		return NULL;
 }
 
 BinaryNode* BST::search(BinaryNode* root, ItemType value)
@@ -381,6 +383,7 @@ BinaryNode* BST::nodeK(BinaryNode* root, ItemType value)
 }
 */
 
+//display tree
 void BST::display()
 {
 	int level = getHeight();
@@ -389,7 +392,7 @@ void BST::display()
 		cout << "There is no tree to be displayed. " << endl;
 	}
 	else
-		display(root, level);
+		display(root, 1);
 }
 
 void BST::display(BinaryNode *ptr, int level)
@@ -398,43 +401,20 @@ void BST::display(BinaryNode *ptr, int level)
 	if (ptr != NULL)
 	{
 		display(ptr->right, level + 1);
-		printf("\n");
+		cout << endl;
 		if (ptr == root)
-			cout << "Root -> ";
-		for (i = 0; i < level && ptr != root; i++)
-			cout << "        ";
+			cout << "Root ->";
+		else
+		{
+			for (i = 0; i < level && ptr != root; i++)
+				cout << "     ";
+		}
 		cout << ptr->item;
 		display(ptr->left, level + 1);
 	}
-	/*
-	for (int i = 1; i <= level; i++)
-	{
-		string gap = "   ";
-		for (int n = 0; n < pow(2, level - i) - 1; n++)
-			gap += "   ";
-	}
-
-	string levelNodes = printLevel(root, i, gap);
-	cout << levelNodes << endl;
-	*/
 }
 
-//get the height difference between the left and right subtree
-int BST::heightDiff()
-{
-	if (isEmpty())
-	{
-		cout << "Your tree is empty." << endl;
-		return 0;
-	}
-	else
-		return heightDiff(root);
-}
 
-int BST::heightDiff(BinaryNode* t)
-{
-	return (getHeight(t->left) - getHeight(t->right));
-}
 
 //MIGHT USE IN THE FUTURE
 //IDK

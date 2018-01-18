@@ -8,9 +8,7 @@
 //ISF02
 //PO2
 
-
 // DSA Assignment.cpp : Defines the entry point for the console application.
-
 
 #include "stdafx.h"
 #include <iostream>
@@ -30,36 +28,42 @@ void opt3();
 void opt4();
 //void opt5();
 void opt6();
+void opt7();
 
 int main()
 {
-	//s is an integer given by the user
+	// s is an integer given by the user
 	int s;
 	cout << "Enter integer to initialise tree: ";
 	cin >> s;
-	
-	while (true)
+
+	// success when the input is an integer greater than 0
+	bool success = ((s % 1 == 0) && (s > 0));
+
+	while (int k = 1)
 	{
-		if (s%1 != 0 || s < 0)
+		if (success)
 		{
-			cout << "Input must be valid. Please enter a valid number: ";
+			k = 0;
+			break;
+		}
+
+		else
+		{
 			cin.clear();
 			cin.ignore();
+			cout << "Input must be valid. Please enter a valid number: ";
 			cin >> s;
 		}
-		else
-			break;
 	}
 
+	//create binary search tree
 	bst.initialise(s);
+	int opt= -1;
 
-
-
-	while (true)
+	while (opt != 0)
 	{
 		displayMenu();
-
-		int opt;
 		cout << "Enter option: ";
 		cin >> opt;
 
@@ -99,8 +103,16 @@ int main()
 			break;
 		}
 
+		else if (opt == 7)
+		{
+			opt7();
+		}
+
 		else
+		{
 			cout << "Sorry, you have entered an invalid option" << endl;
+		}
+			
 			
 	}
 
@@ -118,6 +130,7 @@ void displayMenu()
 	cout << "[4] Display values in ascending order" << endl;
 	cout << "[5] Display value of node K" << endl;
 	cout << "[6] Display the tree" << endl;
+	cout << "[7] Check if tree is balanced" << endl;
 	cout << "[0] Exit" << endl;
 	cout << "============================================" << endl;
 }
@@ -136,7 +149,7 @@ void opt2() //add a value
 	cout << "Enter value to add: ";
 	cin >> v;
 	bst.insert(v);
-	cout << "The value " << v << " has been added." << endl;
+
 }
 
 void opt3() //remove a value
@@ -145,7 +158,6 @@ void opt3() //remove a value
 	cout << "Enter value to delete: ";
 	cin >> v;
 	bst.remove(v);
-	cout << "The value " << v << " has been removed." << endl;
 }
 
 void opt4() //display values in ascending order 
@@ -161,6 +173,19 @@ void opt5() //display value in node k
 void opt6() //display the tree
 {
 	bst.display();
+
+}
+
+void opt7()	//check if tree is balanced
+{
+	bool test = bst.isBalanced();
+	if (test == true)
+	{
+		cout << "Tree is balanced." << endl;
+	}
+
+	else
+		cout << "Tree is unbalanced." << endl;
 }
 
 
