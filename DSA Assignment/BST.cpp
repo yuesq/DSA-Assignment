@@ -366,7 +366,8 @@ void BST::display()
 	{
 		cout << "There is no tree to be displayed. " << endl;
 	}
-	display(root, level);
+	else
+		display(root, level);
 }
 
 void BST::display(BinaryNode *ptr, int level)
@@ -383,7 +384,19 @@ void BST::display(BinaryNode *ptr, int level)
 		cout << ptr->item;
 		display(ptr->left, level + 1);
 	}
+	/*
+	for (int i = 1; i <= level; i++)
+	{
+		string gap = "   ";
+		for (int n = 0; n < pow(2, level - i) - 1; n++)
+			gap += "   ";
+	}
+
+	string levelNodes = 
+	*/
 }
+
+
 
 //MIGHT USE IN THE FUTURE
 //IDK

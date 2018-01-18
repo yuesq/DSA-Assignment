@@ -136,6 +136,7 @@ void opt2() //add a value
 	cout << "Enter value to add: ";
 	cin >> v;
 	bst.insert(v);
+	cout << "The value " << v << " has been added." << endl;
 }
 
 void opt3() //remove a value
@@ -144,6 +145,7 @@ void opt3() //remove a value
 	cout << "Enter value to delete: ";
 	cin >> v;
 	bst.remove(v);
+	cout << "The value " << v << " has been removed." << endl;
 }
 
 void opt4() //display values in ascending order 
