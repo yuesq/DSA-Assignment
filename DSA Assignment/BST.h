@@ -22,7 +22,7 @@ public:
 	void initialise(ItemType value);
 
 	//convert array into binary search tree
-	void convert(int arr[], int start, int end, BinaryNode* &root);
+	BinaryNode* convert(int(arr[]), int start, int end, BinaryNode* &root);
 
 	// insert an item to the binary search tree
 	void insert(ItemType item);
