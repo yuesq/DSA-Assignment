@@ -148,6 +148,8 @@ void opt2() //add a value
 	int v;
 	cout << "Enter value to add: ";
 	cin >> v;
+	// new function for insert
+	//bst.add(v);
 	bst.insert(v);
 
 }

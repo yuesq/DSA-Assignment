@@ -43,7 +43,6 @@ void BST::initialise(ItemType value)
 		insert(i);
 		m += i;
 	}
-
 	cout << "sum is = " << m << endl;
 
 }
@@ -130,11 +129,78 @@ void BST::insert(BinaryNode* &t, ItemType item)
 		newNode->right = NULL;
 		t = newNode;
 	}
+	else if (item < t->item)
+	{
+		insert(t->left, item);  // insert in left subtree
+	}
+	else if (item > t->item)
+	{
+		insert(t->right, item); // insert in right subtree
+	}
 	else
-		if (item < t->item)
-			insert(t->left, item);  // insert in left subtree
+		cout << "Item already exists in tree." << endl; 
+}
+
+//AVL rotations
+// right right rotation
+BinaryNode *BST::rr_rotation(BinaryNode *root)
+{
+	BinaryNode *t;
+	t = root->right;
+	root->right = t->left;
+	t->left = root;
+	return t;
+}
+
+//left left rotation
+BinaryNode *BST::ll_rotation(BinaryNode *root)
+{
+	BinaryNode *t;
+	t = root->left;
+	root->left = t->left;
+	t->left = root;
+	return t;
+}
+
+//left right rotation
+BinaryNode *BST::lr_rotation(BinaryNode *root)
+{
+	BinaryNode *t;
+	t = root->left;
+	root->left = rr_rotation(t);
+	return ll_rotation(root);
+}
+
+//right left rotation
+BinaryNode *BST::rl_rotation(BinaryNode *parent)
+{
+	BinaryNode *t;
+	t = root->right;
+	root->right = ll_rotation(t);
+	return rr_rotation(root);
+}
+
+//Balance BST tree to make it AVL
+BinaryNode *BST::balance(BinaryNode *t)
+{
+	int bal = heightDiff(t);
+	if (bal > 1)
+	{
+		if (heightDiff(t->left) > 0)
+			t = ll_rotation(t);
 		else
-			insert(t->right, item); // insert in right subtree
+			t = lr_rotation(t);
+	}
+
+	else if (bal < -1)
+	{
+		if (heightDiff(t->right) > 0)
+			t = rl_rotation(t);
+		else
+			t = rr_rotation(t);
+	}
+
+	return t;
 }
 
 // delete an item from the binary search tree
@@ -403,7 +469,7 @@ void BST::display(BinaryNode *ptr, int level)
 		display(ptr->right, level + 1);
 		cout << endl;
 		if (ptr == root)
-			cout << "Root ->";
+			cout << "root->";
 		else
 		{
 			for (i = 0; i < level && ptr != root; i++)

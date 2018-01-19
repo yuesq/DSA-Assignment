@@ -27,6 +27,20 @@ public:
 	// insert an item to the binary search tree
 	void insert(ItemType item);
 	void insert(BinaryNode* &root, ItemType item);
+	void add(BinaryNode* &root, ItemType item);
+
+	// create AVL tree from binary search tree
+	// rotations
+	BinaryNode *rr_rotation(BinaryNode *);
+	BinaryNode *ll_rotation(BinaryNode *);
+	BinaryNode *lr_rotation(BinaryNode *);
+	BinaryNode *rl_rotation(BinaryNode *);
+
+	//balance the tree
+	BinaryNode* balance(BinaryNode *);
+
+	//insertion
+	//BinaryNode* insert(BinaryNode *, int);
 
 	// delete an item from the binary search tree
 	void remove(ItemType value);
