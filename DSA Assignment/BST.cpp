@@ -29,6 +29,16 @@ BST::BST()
 	root = NULL;
 }
 
+// deconstructor
+void BST::deconstructor(BinaryNode* &t)
+{
+	if (t != NULL)
+	{
+		deconstructor(t->left);
+		deconstructor(t->right);
+		delete t;
+	}
+}
 
 //initialise a data array of values
 void BST::initialise(ItemType value)
@@ -121,24 +131,33 @@ void BST::insert(ItemType item)
 
 void BST::insert(BinaryNode* &t, ItemType item)
 {
-	if (t == NULL)
+	if (isBalanced())
 	{
-		BinaryNode *newNode = new BinaryNode;
-		newNode->item = item;
-		newNode->left = NULL;
-		newNode->right = NULL;
-		t = newNode;
-	}
-	else if (item < t->item)
-	{
-		insert(t->left, item);  // insert in left subtree
-	}
-	else if (item > t->item)
-	{
-		insert(t->right, item); // insert in right subtree
+		if (t == NULL)
+		{
+			BinaryNode *newNode = new BinaryNode;
+			newNode->item = item;
+			newNode->left = NULL;
+			newNode->right = NULL;
+			t = newNode;
+		}
+		else if (item < t->item)
+		{
+			insert(t->left, item);  // insert in left subtree
+		}
+		else if (item > t->item)
+		{
+			insert(t->right, item); // insert in right subtree
+		}
+		else
+			cout << "Item already exists in tree." << endl;
 	}
 	else
-		cout << "Item already exists in tree." << endl; 
+	{
+		//insert rebalance function
+		return;
+	}
+	
 }
 
 //AVL rotations
@@ -181,18 +200,22 @@ BinaryNode *BST::rl_rotation(BinaryNode *parent)
 }
 
 //Balance BST tree to make it AVL
-BinaryNode *BST::balance(BinaryNode *t)
+void BST::rebalance(BinaryNode *t)
 {
-	int bal = heightDiff(t);
-	if (bal > 1)
+	//store intial height diff as a variable
+	int hdiff = heightDiff(t);
+	if (hdiff > 1)
 	{
+		//compare height diff of left child node with parent node
 		if (heightDiff(t->left) > 0)
 			t = ll_rotation(t);
+
+		//compare height diff of right child with parent node
 		else
 			t = lr_rotation(t);
 	}
 
-	else if (bal < -1)
+	else if (hdiff < -1)
 	{
 		if (heightDiff(t->right) > 0)
 			t = rl_rotation(t);
@@ -200,7 +223,7 @@ BinaryNode *BST::balance(BinaryNode *t)
 			t = rr_rotation(t);
 	}
 
-	return t;
+	return;
 }
 
 // delete an item from the binary search tree
@@ -376,6 +399,20 @@ int BST::heightDiff()
 
 int BST::heightDiff(BinaryNode* t)
 {
+	/*
+	int leftHeight = 0;
+	int rightHeight = 0;
+	
+	if (t->left != NULL)
+	{
+		leftHeight = t->left->height;
+	}
+
+	else if (t->right != NULL)
+	{
+		rightHeight = t->right->height;
+	}
+	*/
 	return (getHeight(t->left) - getHeight(t->right));
 }
 

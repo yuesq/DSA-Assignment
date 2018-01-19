@@ -14,6 +14,9 @@ public:
 	// constructor
 	BST();
 
+	// deconstructor
+	void deconstructor(BinaryNode* &root);
+
 	// search an item in the binary search tree
 	BinaryNode* search(ItemType value);
 	BinaryNode* search(BinaryNode* root, ItemType value);
@@ -27,7 +30,6 @@ public:
 	// insert an item to the binary search tree
 	void insert(ItemType item);
 	void insert(BinaryNode* &root, ItemType item);
-	void add(BinaryNode* &root, ItemType item);
 
 	// create AVL tree from binary search tree
 	// rotations
@@ -37,7 +39,7 @@ public:
 	BinaryNode *rl_rotation(BinaryNode *);
 
 	//balance the tree
-	BinaryNode* balance(BinaryNode *);
+	void rebalance(BinaryNode *);
 
 	//insertion
 	//BinaryNode* insert(BinaryNode *, int);
