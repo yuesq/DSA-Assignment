@@ -53,10 +53,12 @@ void BST::initialise(ItemType value)
 		//calculate values
 		// insert values into tree
 		cout << "value in tree = " << i << endl;
-		insert(i);
+		BinaryNode *root;
+		root = insert(i);
 		m += i;
 	}
 	cout << "sum is = " << m << endl;
+	return;
 
 }
 
@@ -130,12 +132,12 @@ BinaryNode* BST::search(BinaryNode* root, ItemType value)
 }
 
 // insert an item to the binary search tree
-void BST::insert(ItemType item)
+BinaryNode* BST::insert(ItemType item)
 {
-	insert(root, item);
+	return insert(root, item);
 }
 
-void BST::insert(BinaryNode* &t, ItemType item)
+BinaryNode* BST::insert(BinaryNode* &t, ItemType item)
 {
 		if (t == NULL)
 		{
@@ -144,19 +146,21 @@ void BST::insert(BinaryNode* &t, ItemType item)
 			newNode->left = NULL;
 			newNode->right = NULL;
 			t = newNode;
+			return t;
 		}
 		else if (item < t->item)
 		{
-			insert(t->left, item);  // insert in left subtree
-			root = rebalance(root);
+			t->left = insert(t->left, item);  // insert in left subtree
+			t = rebalance(t);
 		}
-		else if (item > t->item)
+		else if (item >= t->item)
 		{
-			insert(t->right, item); // insert in right subtree
-			root = rebalance(root);
+			t->right = insert(t->right, item); // insert in right subtree
+			t = rebalance(t);
 		}
 		else
 			cout << "Item already exists in tree." << endl;
+		return t;
 	
 }
 
