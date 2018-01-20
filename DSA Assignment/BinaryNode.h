@@ -9,3 +9,4 @@ struct BinaryNode
 	BinaryNode *right;	// pointer pointing to right subtree
 	//BinaryNode* height;
 };
+

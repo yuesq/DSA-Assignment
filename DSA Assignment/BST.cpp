@@ -22,6 +22,7 @@ int i;
 
 //dataArray is an array of the values to be put in the BST
 //max number of values in array = 10 000
+// convert array into bst
 int dataArray[10000] = {};
 
 // constructor
@@ -31,13 +32,13 @@ BST::BST()
 }
 
 // deconstructor
-void BST::deconstructor(BinaryNode* &t)
+void BST::deconstructor(BinaryNode* &root)
 {
-	if (t != NULL)
+	if (root != NULL)
 	{
-		deconstructor(t->left);
-		deconstructor(t->right);
-		delete t;
+		deconstructor(root->left);
+		deconstructor(root->right);
+		delete root;
 	}
 }
 
@@ -160,6 +161,11 @@ void BST::insert(BinaryNode* &t, ItemType item)
 }
 
 //Balance BST tree to make it AVL
+BinaryNode* BST::rebalance()
+{
+	return(rebalance(root));
+}
+//Balance BST tree to make it AVL
 BinaryNode* BST::rebalance(BinaryNode *t)
 {
 	//store intial height diff into a var called balFactor. 
@@ -177,20 +183,20 @@ BinaryNode* BST::rebalance(BinaryNode *t)
 	{
 		//compare height diff of left child node with parent node
 		if (heightDiff(t->left) > 0)
-			t = rr_rotation(t);
+			t = ll_rotation(t);
 
 		//compare height diff of right child with parent node
 		else
-			t = lr_rotation(t);
+			t = rr_rotation(t);
 	}
 
 	//if right is heavier
 	else if (balFactor < -1)
 	{
-		if (heightDiff(t->right) < 0)
-			t = ll_rotation(t);
-		else
+		if (heightDiff(t->right) > 0)
 			t = rl_rotation(t);
+		else
+			t = rr_rotation(t);
 	}
 	return root;
 }
@@ -200,8 +206,11 @@ BinaryNode* BST::rebalance(BinaryNode *t)
 // right right rotation
 BinaryNode *BST::rr_rotation(BinaryNode *root)
 {
+	//create temporary node
 	BinaryNode *t;
+	//assign value of right subtree into temp ptr
 	t = root->right;
+	//right child of root = left child of temp
 	root->right = t->left;
 	t->left = root;
 	return t;
@@ -210,10 +219,13 @@ BinaryNode *BST::rr_rotation(BinaryNode *root)
 //left left rotation
 BinaryNode *BST::ll_rotation(BinaryNode *root)
 {
+	//create temporary node
 	BinaryNode *t;
-	t = root->right;
-	root->right = t->left;
-	t->left = root;
+	//assign value of left subtree into temp ptr
+	t = root->left;
+	//left child of root = right child of temps
+	root->left = t->right;
+	t->right = root;
 	return t;
 }
 
@@ -398,10 +410,15 @@ int BST::getHeight(BinaryNode* t)
 		return 0;
 	else
 	{
-		int leftHeight = getHeight(t->left);//initialise left height as a value in pointer var
-		int rightHeight = getHeight(t->right); //initialise right height as a value in another pointer var
-		int maxHeight = max(leftHeight, rightHeight); //compare the two to see which side of the tree is taller
-		return (1+ maxHeight);
+		//initialise left height as a value in pointer var
+		int leftHeight = getHeight(t->left);
+		//initialise right height as a value in another pointer var
+		int rightHeight = getHeight(t->right); 
+		//compare the two to see which side of the tree is taller
+		int maxHeight = max(leftHeight, rightHeight);
+		treeHeight = maxHeight + 1;
+
+		return (treeHeight);
 	}
 }
 
