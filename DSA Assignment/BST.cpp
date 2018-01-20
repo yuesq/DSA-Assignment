@@ -21,13 +21,30 @@ BST::BST()
 }
 
 // deconstructor
+void BST::deconstructor()
+{
+	if (!isEmpty())
+	{
+		cout << "Tree has been destroyed. " << endl;
+		deconstructor(root);
+	}
+
+	else
+	{
+		cout << "There is no tree to destroy." << endl;
+	}
+}
+
 void BST::deconstructor(BinaryNode* &root)
 {
 	if (root != NULL)
 	{
+		BinaryNode *del;
 		deconstructor(root->left);
 		deconstructor(root->right);
-		delete root;
+		del = root;
+		free(del);
+		root = NULL;
 	}
 }
 

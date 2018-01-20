@@ -29,6 +29,7 @@ void opt4();
 void opt5();
 void opt6();
 void opt7();
+void opt8();
 
 int main()
 {
@@ -108,6 +109,11 @@ int main()
 			opt7();
 		}
 
+		else if (opt == 8)
+		{
+			opt8();
+		}
+
 		else
 		{
 			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
@@ -131,6 +137,7 @@ void displayMenu()
 	cout << "[5] Display value of node K" << endl;
 	cout << "[6] Check if tree is balanced" << endl;
 	cout << "[7] Display the tree" << endl;
+	cout << "[8] Destroy the tree" << endl;
 	cout << "[0] Exit" << endl;
 	cout << "============================================" << endl;
 }
@@ -204,4 +211,9 @@ void opt6()	//check if tree is balanced
 void opt7() //display the tree
 {
 	bst.display();
+}
+
+void opt8()
+{
+	bst.deconstructor();
 }
