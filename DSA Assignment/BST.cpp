@@ -8,23 +8,11 @@
 #include <new>      // for bad_alloc
 #include <algorithm>
 #include "BST.h"
-#include "Queue.h"
 
 using namespace std;
 
 #define max(x,y) ((x > y) ? x : y)
 #define min(x,y) ((x < y) ? x : y)
-
-//m is the sum of all node values in the bst
-int m = 0;
-
-//i is the iteration
-int i;
-
-//dataArray is an array of the values to be put in the BST
-//max number of values in array = 10 000
-// convert array into bst
-int dataArray[10000] = {};
 
 // constructor
 BST::BST()
@@ -43,7 +31,7 @@ void BST::deconstructor(BinaryNode* &root)
 	}
 }
 
-//initialise values and insert into tree
+// initialise values and insert into tree
 void BST::initialise(ItemType value)
 {
 	//m is the sum of all node values in the bst
@@ -61,7 +49,7 @@ void BST::initialise(ItemType value)
 
 }
 
-//convert array into binary search tree
+// convert array into binary search tree
 BinaryNode* BST::convert(int (arr[]), int start, int end, BinaryNode* &root)
 {
 	//create int for mid of array
@@ -201,7 +189,6 @@ BinaryNode* BST::rebalance(BinaryNode *t)
 	}
 	return t;
 }
-
 
 //AVL rotations
 // right right rotation
@@ -490,12 +477,51 @@ bool BST::isEmpty()
 	return (root == NULL);
 }
 
-//look for node k
-BinaryNode* BST::nodeK(BinaryNode* root, ItemType item)
+// look for node k
+int BST::nodeK(ItemType size)
 {
-	Queue queue;
+	if (isEmpty())
+	{
+		cout << "The tree is empty." << endl;
+		return 0;
+	}
 
+	else
+	{
+		// dataArray is an array of values in the BST
+		// convert bst into array
+		int dataArray[] = { 0 };
+		int k;
+		k = addToArray(root, dataArray, size);
+		return k;
+	}
+}
 
+int BST::addToArray(BinaryNode* t, int arr[], ItemType size)
+{
+
+	if (t == NULL)
+		return 0;
+
+	else
+	{
+		arr[size] = t->item;
+		
+		if (t->left != NULL)
+		{
+			addToArray(t->left, arr, size);
+		}
+
+		if (t->right != NULL)
+		{
+			addToArray(t->right, arr, size);
+		}
+
+		arr[size] = t->item;
+		size++;
+	}
+
+	return(t->item);
 }
 
 //display tree

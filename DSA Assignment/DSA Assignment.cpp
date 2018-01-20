@@ -26,7 +26,7 @@ void opt1();
 void opt2();
 void opt3();
 void opt4();
-//void opt5();
+void opt5();
 void opt6();
 void opt7();
 
@@ -86,17 +86,17 @@ int main()
 		{
 			opt4();
 		}
-		/*
+		//*
 		else if (opt ==5)
 		{
 			opt5();
 		}
-		*/
+		//*/
 		else if (opt == 6)
 		{
 			opt6();
 		}
-		//*/
+		
 		else if (opt == 0)
 		{
 			cout << "Thank you!" << endl;
@@ -163,12 +163,31 @@ void opt4() //display values in ascending order
 {
 	bst.inorder();
 }
-/*
+
 void opt5() //display value in node k 
 {
+	// store the total number of nodes in var
+	int count;
+	count = bst.countNodes();
+
+	// intialise int value of k
+	// k is the kth node that the user wants to find
+	int k;
+
+	// initialise int var
+	// "final" is the value that is returned by the function
+	int final;
+
+	// check if tree is empty
+	// int test = nodeK(k);
+
+	cout << "There are " << count << " nodes in this tree." << endl;
+	cout << "Which node would you like to find? " << endl;
+	cin >> k;
+	final = bst.nodeK(k);
+	cout << "This is the value of the node you wanted to find: " << final << endl;
 }
 
-*/
 
 void opt6()	//check if tree is balanced
 {

@@ -84,8 +84,8 @@ public:
 	bool isBalanced(BinaryNode *t);
 
 	// look for node K
-	BinaryNode* nodeK(ItemType item);
-	BinaryNode* nodeK(BinaryNode* t, ItemType item);
+	int nodeK(ItemType item);
+	int addToArray(BinaryNode* t, int arr[], ItemType item);
 
 	// display the tree
 	void display();
