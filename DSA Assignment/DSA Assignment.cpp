@@ -34,28 +34,40 @@ void opt8();
 int main()
 {
 	// s is an integer given by the user
-	int s;
-	cout << "Enter integer to initialise tree: ";
-	cin >> s;
+	int s = 0;
 
-	// success when the input is an integer greater than 0
-	bool success = ((s % 1 == 0) && (s > 0));
-
-	while (int k = 1)
+	while (s == 0)
 	{
-		if (success)
+		cout << "Enter integer to initialise tree: ";
+		cin >> s;
+
+		if ((s > 0) && (s % 1 == 0))
 		{
-			k = 0;
 			break;
 		}
 
-		else
+		else if ((s < 0))
 		{
+			cout << "You have entered an invalid number. Try again." << endl;
+			s = 0;
+			continue;
+			cin.fail();
 			cin.clear();
 			cin.ignore();
-			cout << "Input must be valid. Please enter a valid number: ";
+		}
+
+		/* this part of code doesnt work
+		else if (s % 1 != 0)
+		{
+			cout << "You have entered an invalid number. Try again." << endl;
+			s = 0;
+			cin.fail();
+			cin.clear();
+			cin.ignore();
 			cin >> s;
 		}
+		*/
+		
 	}
 
 	//create binary search tree

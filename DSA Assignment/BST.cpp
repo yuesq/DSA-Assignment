@@ -319,7 +319,7 @@ void BST::remove(BinaryNode* &t, ItemType value)
 				{
 					parent->right = NULL;
 				}
-			parent = rebalance();
+			//parent = rebalance();
 		}
 		else
 			// -----------------------  case 2 : node has only 1 child  ----------------
@@ -331,14 +331,14 @@ void BST::remove(BinaryNode* &t, ItemType value)
 				else if (isLeftChild)
 				{
 					parent->left = current->right;
-					parent = rebalance();
+					//parent = rebalance();
 				}
 				else
 				{
 					parent->right = current->right;
 					//parent = rebalance();
 				}
-				parent = rebalance();
+				//parent = rebalance();
 			}
 
 			else if (current->right == NULL)
@@ -349,7 +349,7 @@ void BST::remove(BinaryNode* &t, ItemType value)
 						parent->left = current->left;
 					else
 						parent->right = current->left;
-					parent = rebalance();
+					//parent = rebalance();
 				}
 				else
 					// -----------------------  case 3 : node has 2 children  ------------------
@@ -364,8 +364,13 @@ void BST::remove(BinaryNode* &t, ItemType value)
 					remove(t, n);
 					// replace the node’s item with that of the successor
 					current->item = n;
-					parent = rebalance();
 				}
+		if (!isBalanced())
+		{
+			parent = rebalance(parent);
+		}
+		
+
 	}
 }
 
@@ -373,7 +378,7 @@ void BST::remove(BinaryNode* &t, ItemType value)
 void BST::inorder()
 {
 	if (isEmpty())
-		cout << "No item found" << endl;
+		cout << "Sorry! No items were found." << endl;
 	else
 		inorder(root);
 }
@@ -393,7 +398,7 @@ void BST::inorder(BinaryNode* t)
 void BST::preorder()
 {
 	if (isEmpty())
-		cout << "No item found" << endl;
+		cout << "Sorry! No items were found." << endl;
 	else
 		preorder(root);
 }
@@ -412,7 +417,7 @@ void BST::preorder(BinaryNode* t)
 void BST::postorder()
 {
 	if (isEmpty())
-		cout << "No item found" << endl;
+		cout << "Sorry! No items were found." << endl;
 	else
 		postorder(root);
 }
@@ -460,7 +465,6 @@ int BST::heightDiff()
 	//return height = 0
 	if (isEmpty())
 	{
-		cout << "Your tree is empty." << endl;
 		return 0;
 	}
 
