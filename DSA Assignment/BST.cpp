@@ -140,7 +140,7 @@ void BST::insert(BinaryNode* &t, ItemType item)
 			insert(t->left, item);  // insert in left subtree
 			t = rebalance(t);
 		}
-		else if (item >= t->item)
+		else if (item > t->item)
 		{
 			insert(t->right, item); // insert in right subtree
 			t = rebalance(t);
@@ -170,27 +170,38 @@ BinaryNode* BST::rebalance(BinaryNode *t)
 	//means tree is unbalanced and needs to be balanced
 	int balFactor = heightDiff(t);
 
-	//if left is heavier
-	if (balFactor > 1)
+	// check if tree is already balanced
+	if (isBalanced())
 	{
-		//compare height diff of left child node with parent node
-		if (heightDiff(t->left) > 0)
-			t = ll_rotation(t);
-
-		//compare height diff of right child with parent node
-		else
-			t = rr_rotation(t);
+		return t;
 	}
 
-	//if right is heavier
-	else if (balFactor < -1)
+	// tree is unbalanced, perform rebalance
+	else
 	{
-		if (heightDiff(t->right) > 0)
-			t = rl_rotation(t);
-		else
-			t = rr_rotation(t);
+		//if left is heavier
+		if (balFactor > 1)
+		{
+			//compare height diff of left child node with parent node
+			if (heightDiff(t->left) > 0)
+				t = ll_rotation(t);
+
+			//compare height diff of right child with parent node
+			else
+				t = rr_rotation(t);
+		}
+
+		//if right is heavier
+		else if (balFactor < -1)
+		{
+			if (heightDiff(t->right) > 0)
+				t = rl_rotation(t);
+			else
+				t = rr_rotation(t);
+		}
+		return t;
 	}
-	return t;
+	
 }
 
 //AVL rotations
@@ -299,26 +310,29 @@ void BST::remove(BinaryNode* &t, ItemType value)
 			{
 				if (current == t)
 					t = current->right;
+
 				else if (isLeftChild)
 				{
 					parent->left = current->right;
-					//parent = rebalance();
+					parent = rebalance();
 				}
 				else
 				{
 					parent->right = current->right;
 					//parent = rebalance();
 				}
+				parent = rebalance();
 			}
-			else
-				if (current->right == NULL)
+
+			else if (current->right == NULL)
 				{
 					if (current == t)
 						t = current->left;
 					else if (isLeftChild)
 						parent->left = current->left;
 					else
-						parent->right = current->left;;
+						parent->right = current->left;
+					parent = rebalance();
 				}
 				else
 					// -----------------------  case 3 : node has 2 children  ------------------
@@ -333,6 +347,7 @@ void BST::remove(BinaryNode* &t, ItemType value)
 					remove(t, n);
 					// replace the node’s item with that of the successor
 					current->item = n;
+					parent = rebalance();
 				}
 	}
 }
@@ -446,6 +461,7 @@ int BST::heightDiff(BinaryNode* t)
 	
 	//get heights of each side of tree
 	//store heights into variables
+
 	leftHeight = getHeight(t->left);
 	rightHeight = getHeight(t->right);
 

@@ -33,17 +33,14 @@ public:
 
 	// create AVL tree from binary search tree
 	// rotations
-	BinaryNode *rr_rotation(BinaryNode *);
-	BinaryNode *ll_rotation(BinaryNode *);
-	BinaryNode *lr_rotation(BinaryNode *);
-	BinaryNode *rl_rotation(BinaryNode *);
+	BinaryNode *rr_rotation(BinaryNode *t);
+	BinaryNode *ll_rotation(BinaryNode *t);
+	BinaryNode *lr_rotation(BinaryNode *t);
+	BinaryNode *rl_rotation(BinaryNode *t);
 
 	//balance the tree
 	BinaryNode* rebalance();
-	BinaryNode* rebalance(BinaryNode *);
-
-	//insertion
-	//BinaryNode* insert(BinaryNode *, int);
+	BinaryNode* rebalance(BinaryNode *t);
 
 	// delete an item from the binary search tree
 	void remove(ItemType value);
@@ -60,9 +57,6 @@ public:
 	// traverse the binary search tree in postorder
 	void postorder();
 	void postorder(BinaryNode* t);
-
-	//calculates height?
-	void updateHeight();
 
 	// compute the height of the binary search tree
 	int getHeight();
@@ -90,7 +84,5 @@ public:
 	// display the tree
 	void display();
 	void display(BinaryNode *ptr, int level);
-
-	///
 	
 };

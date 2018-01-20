@@ -204,5 +204,4 @@ void opt6()	//check if tree is balanced
 void opt7() //display the tree
 {
 	bst.display();
-
 }
