@@ -133,6 +133,7 @@ void BST::insert(BinaryNode* &t, ItemType item)
 			newNode->left = NULL;
 			newNode->right = NULL;
 			t = newNode;
+			cout << "Item " << item << " has been added to the tree." << endl;
 		}
 		else if (item < t->item)
 		{
@@ -145,8 +146,10 @@ void BST::insert(BinaryNode* &t, ItemType item)
 			t = rebalance(t);
 		}
 		else
-			cout << "Item already exists in tree." << endl;
-	
+		{
+			cout << "Item already exists in tree. Item cannot be added to the tree." << endl;
+			return;
+		}
 }
 
 //Balance BST tree to make it AVL
@@ -254,6 +257,7 @@ void BST::remove(BinaryNode* &t, ItemType value)
 		if (value == current->item)
 		{
 			found = true;
+
 		}
 		else
 		{
@@ -280,9 +284,14 @@ void BST::remove(BinaryNode* &t, ItemType value)
 				t = NULL;
 			else
 				if (isLeftChild)
+				{
 					parent->left = NULL;
+				}
 				else
+				{
 					parent->right = NULL;
+				}
+			parent = rebalance();
 		}
 		else
 			// -----------------------  case 2 : node has only 1 child  ----------------
@@ -291,9 +300,15 @@ void BST::remove(BinaryNode* &t, ItemType value)
 				if (current == t)
 					t = current->right;
 				else if (isLeftChild)
+				{
 					parent->left = current->right;
+					//parent = rebalance();
+				}
 				else
-					parent->right = current->right;;
+				{
+					parent->right = current->right;
+					//parent = rebalance();
+				}
 			}
 			else
 				if (current->right == NULL)
@@ -490,7 +505,7 @@ int BST::nodeK(ItemType size)
 	{
 		// dataArray is an array of values in the BST
 		// convert bst into array
-		int dataArray[] = { 0 };
+		int dataArray[10000] = { 0 };
 		int k;
 		k = addToArray(root, dataArray, size);
 		return k;
