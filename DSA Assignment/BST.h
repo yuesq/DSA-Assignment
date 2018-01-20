@@ -85,7 +85,7 @@ public:
 
 	// look for node K
 	BinaryNode* nodeK(ItemType item);
-	BinaryNode* nodeK(BinaryNode* root, ItemType item);
+	BinaryNode* nodeK(BinaryNode* t, ItemType item);
 
 	// display the tree
 	void display();

@@ -110,7 +110,7 @@ int main()
 
 		else
 		{
-			cout << "Sorry, you have entered an invalid option" << endl;
+			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
 		}
 			
 			

@@ -8,6 +8,7 @@
 #include <new>      // for bad_alloc
 #include <algorithm>
 #include "BST.h"
+#include "Queue.h"
 
 using namespace std;
 
@@ -392,10 +393,6 @@ void BST::postorder(BinaryNode* t)
 	}
 }
 
-//update height
-//void BST::updateHeight()
-
-
 // compute the height of the binary search tree
 int BST::getHeight()
 {
@@ -493,36 +490,13 @@ bool BST::isEmpty()
 	return (root == NULL);
 }
 
-/*//look for node k
-BinaryNode* BST::nodeK(ItemType value)
+//look for node k
+BinaryNode* BST::nodeK(BinaryNode* root, ItemType item)
 {
-	if (isEmpty())
-		return NULL;
-	else
-	{
-		BinaryNode* newNode = new BinaryNode;
-		newNode->item = value;
-		BinaryNode *ptrNode = new BinaryNode;
-		ptrNode = search(value);
-		if (ptrNode == NULL)
-		{
-			cout << "Not found." << endl;
-			return NULL;
-		}
+	Queue queue;
 
-		else (ptrNode == root)
-		{
-			cout << "Found. " << endl;
-			return root;
-		}
-	}
-}
 
-BinaryNode* BST::nodeK(BinaryNode* root, ItemType value)
-{
-	
 }
-*/
 
 //display tree
 void BST::display()
@@ -556,60 +530,3 @@ void BST::display(BinaryNode *ptr, int level)
 }
 
 
-
-//MIGHT USE IN THE FUTURE
-//IDK
-/*
-//insert function
-BinaryNode* BST::insert(ItemType item)
-{
-return insert(root, item);
-}
-
-BinaryNode* BST::insert(BinaryNode* &root, ItemType item)
-{
-if (isEmpty())
-{
-root = new BinaryNode;
-root->item = item;
-root->left = NULL;
-root->right = NULL;
-return root;
-}
-
-//insert into left subtree
-else if (item < (root->item))
-{
-insert((root->left), item);
-root = balance(root);
-}
-
-//insert into right subtree
-else if (item > (root->item))
-{
-insert((root->right), item);
-root = balance(root);
-}
-return root;
-}
-
-//right rotation
-BinaryNode* BST::r_rotation(BinaryNode* t)
-{
-BinaryNode *ptrNode;
-ptrNode = t->left;
-t->left = ptrNode->right;
-ptrNode->right = t;
-
-return ptrNode;
-}
-
-int BST::countNodes(BinaryNode* t)
-{
-if (t == NULL)
-return 0;
-else
-return 1 + countNodes(t->left) + countNodes(t->right);
-}
-
-*/
