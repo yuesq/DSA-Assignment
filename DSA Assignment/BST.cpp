@@ -278,7 +278,12 @@ BinaryNode *BST::rl_rotation(BinaryNode *parent)
 // delete an item from the binary search tree
 void BST::remove(ItemType value)
 {
-	remove(root, value);
+	if (isEmpty())
+	{
+		cout << "There is no tree. No values can be removed." << endl;
+	}
+	else
+		remove(root, value);
 }
 
 void BST::remove(BinaryNode* &t, ItemType value)
@@ -374,11 +379,6 @@ void BST::remove(BinaryNode* &t, ItemType value)
 					// replace the node’s item with that of the successor
 					current->item = n;
 				}
-		if (!isBalanced())
-		{
-			parent = rebalance(parent);
-		}
-		
 
 	}
 }
@@ -551,7 +551,7 @@ int BST::nodeK(ItemType size)
 	{
 		// dataArray is an array of values in the BST
 		// convert bst into array
-		int dataArray[10000] = { 0 };
+		int dataArray[10000] = { };
 		int k;
 		k = addToArray(root, dataArray, size);
 		return k;
