@@ -39,7 +39,8 @@ public:
 	BinaryNode *rl_rotation(BinaryNode *);
 
 	//balance the tree
-	void rebalance(BinaryNode *);
+	BinaryNode* rebalance();
+	BinaryNode* rebalance(BinaryNode *);
 
 	//insertion
 	//BinaryNode* insert(BinaryNode *, int);
@@ -59,6 +60,9 @@ public:
 	// traverse the binary search tree in postorder
 	void postorder();
 	void postorder(BinaryNode* t);
+
+	//calculates height?
+	void updateHeight();
 
 	// compute the height of the binary search tree
 	int getHeight();

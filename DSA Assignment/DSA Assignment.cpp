@@ -129,8 +129,8 @@ void displayMenu()
 	cout << "[3] Remove a value" << endl;
 	cout << "[4] Display values in ascending order" << endl;
 	cout << "[5] Display value of node K" << endl;
-	cout << "[6] Display the tree" << endl;
-	cout << "[7] Check if tree is balanced" << endl;
+	cout << "[6] Check if tree is balanced" << endl;
+	cout << "[7] Display the tree" << endl;
 	cout << "[0] Exit" << endl;
 	cout << "============================================" << endl;
 }
@@ -172,13 +172,8 @@ void opt5() //display value in node k
 }
 
 */
-void opt6() //display the tree
-{
-	bst.display();
 
-}
-
-void opt7()	//check if tree is balanced
+void opt6()	//check if tree is balanced
 {
 	bool test = bst.isBalanced();
 	if (test == true)
@@ -190,4 +185,8 @@ void opt7()	//check if tree is balanced
 		cout << "Tree is unbalanced." << endl;
 }
 
+void opt7() //display the tree
+{
+	bst.display();
 
+}

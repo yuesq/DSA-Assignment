@@ -21,6 +21,7 @@ int m = 0;
 int i;
 
 //dataArray is an array of the values to be put in the BST
+//max number of values in array = 10 000
 int dataArray[10000] = {};
 
 // constructor
@@ -40,7 +41,7 @@ void BST::deconstructor(BinaryNode* &t)
 	}
 }
 
-//initialise a data array of values
+//initialise values and insert into tree
 void BST::initialise(ItemType value)
 {
 	//m is the sum of all node values in the bst
@@ -48,6 +49,7 @@ void BST::initialise(ItemType value)
 
 	for (int i = 1; m <= value; i++)
 	{
+		//calculate values
 		// insert values into tree
 		cout << "value in tree = " << i << endl;
 		insert(i);
@@ -79,11 +81,14 @@ BinaryNode* BST::convert(int (arr[]), int start, int end, BinaryNode* &root)
 // search an item in the binary search tree
 BinaryNode* BST::search(ItemType value)
 {
+	//prints the root of the tree
 	if (root != 0)
 	{
 		cout << "found root = " << root->item << endl;
 		return search(root, value);
 	}
+	
+	//
 	else
 		return NULL;
 }
@@ -131,8 +136,6 @@ void BST::insert(ItemType item)
 
 void BST::insert(BinaryNode* &t, ItemType item)
 {
-	if (isBalanced())
-	{
 		if (t == NULL)
 		{
 			BinaryNode *newNode = new BinaryNode;
@@ -144,21 +147,54 @@ void BST::insert(BinaryNode* &t, ItemType item)
 		else if (item < t->item)
 		{
 			insert(t->left, item);  // insert in left subtree
+			root = rebalance(root);
 		}
 		else if (item > t->item)
 		{
 			insert(t->right, item); // insert in right subtree
+			root = rebalance(root);
 		}
 		else
 			cout << "Item already exists in tree." << endl;
-	}
-	else
-	{
-		//insert rebalance function
-		return;
-	}
 	
 }
+
+//Balance BST tree to make it AVL
+BinaryNode* BST::rebalance(BinaryNode *t)
+{
+	//store intial height diff into a var called balFactor. 
+	//balFactor == balance factor
+	//balance factor is the height difference between the sub trees
+	//left subtree - right subtree = 0		: no difference in heights
+	//left subtree - right subtree = -1		: right is heavier by one level. but is balanced
+	//left subtree - right subtree = 1		: left subtree is heavier by one level, but is balanced
+	// if numbers are less than -1 or more than 1, the difference in height is 2
+	//means tree is unbalanced and needs to be balanced
+	int balFactor = heightDiff(t);
+
+	//if left is heavier
+	if (balFactor > 1)
+	{
+		//compare height diff of left child node with parent node
+		if (heightDiff(t->left) > 0)
+			t = rr_rotation(t);
+
+		//compare height diff of right child with parent node
+		else
+			t = lr_rotation(t);
+	}
+
+	//if right is heavier
+	else if (balFactor < -1)
+	{
+		if (heightDiff(t->right) < 0)
+			t = ll_rotation(t);
+		else
+			t = rl_rotation(t);
+	}
+	return root;
+}
+
 
 //AVL rotations
 // right right rotation
@@ -175,8 +211,8 @@ BinaryNode *BST::rr_rotation(BinaryNode *root)
 BinaryNode *BST::ll_rotation(BinaryNode *root)
 {
 	BinaryNode *t;
-	t = root->left;
-	root->left = t->left;
+	t = root->right;
+	root->right = t->left;
 	t->left = root;
 	return t;
 }
@@ -197,33 +233,6 @@ BinaryNode *BST::rl_rotation(BinaryNode *parent)
 	t = root->right;
 	root->right = ll_rotation(t);
 	return rr_rotation(root);
-}
-
-//Balance BST tree to make it AVL
-void BST::rebalance(BinaryNode *t)
-{
-	//store intial height diff as a variable
-	int hdiff = heightDiff(t);
-	if (hdiff > 1)
-	{
-		//compare height diff of left child node with parent node
-		if (heightDiff(t->left) > 0)
-			t = ll_rotation(t);
-
-		//compare height diff of right child with parent node
-		else
-			t = lr_rotation(t);
-	}
-
-	else if (hdiff < -1)
-	{
-		if (heightDiff(t->right) > 0)
-			t = rl_rotation(t);
-		else
-			t = rr_rotation(t);
-	}
-
-	return;
 }
 
 // delete an item from the binary search tree
@@ -371,6 +380,10 @@ void BST::postorder(BinaryNode* t)
 	}
 }
 
+//update height
+//void BST::updateHeight()
+
+
 // compute the height of the binary search tree
 int BST::getHeight()
 {
@@ -379,40 +392,48 @@ int BST::getHeight()
 
 int BST::getHeight(BinaryNode* t)
 {
+	int treeHeight = 0;;
+
 	if (t == NULL)
 		return 0;
 	else
-		return 1 + max(getHeight(t->left), getHeight(t->right));
+	{
+		int leftHeight = getHeight(t->left);//initialise left height as a value in pointer var
+		int rightHeight = getHeight(t->right); //initialise right height as a value in another pointer var
+		int maxHeight = max(leftHeight, rightHeight); //compare the two to see which side of the tree is taller
+		return (1+ maxHeight);
+	}
 }
 
 //compute the height difference between the left and right subtree
 int BST::heightDiff()
 {
+	//if tree is empty
+	//return height = 0
 	if (isEmpty())
 	{
 		cout << "Your tree is empty." << endl;
 		return 0;
 	}
+
+	//tree is not empty
+	//return the height difference between the subtrees
 	else
 		return heightDiff(root);
 }
 
 int BST::heightDiff(BinaryNode* t)
 {
-	/*
+	
 	int leftHeight = 0;
 	int rightHeight = 0;
 	
-	if (t->left != NULL)
-	{
-		leftHeight = t->left->height;
-	}
+	//get heights of each side of tree
+	//store heights into variables
+	leftHeight = getHeight(t->left);
+	rightHeight = getHeight(t->right);
 
-	else if (t->right != NULL)
-	{
-		rightHeight = t->right->height;
-	}
-	*/
+	//return the difference between the heights
 	return (getHeight(t->left) - getHeight(t->right));
 }
 
