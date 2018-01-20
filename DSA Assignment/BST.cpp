@@ -88,27 +88,36 @@ BinaryNode* BST::convert(int (arr[]), int start, int end, BinaryNode* &root)
 // search an item in the binary search tree
 BinaryNode* BST::search(ItemType value)
 {
-	//prints the root of the tree
+	//check if tree is not empty
 	if (root != 0)
 	{
+		//prints the root of the tree
 		cout << "found root = " << root->item << endl;
+		
+		//prints path to item
 		return search(root, value);
 	}
 	
-	//
+	// tree is empty
 	else
+	{
+		cout << "There is no tree." << endl;
 		return NULL;
+	}
 }
 
 BinaryNode* BST::search(BinaryNode* root, ItemType value)
 {
 	if (root == NULL)	// item not found
 	{
-		cout << "Not found" << endl;
+		cout << "The item was not found" << endl;
 		return NULL;
 	}
 	else if (root->item == value) //item found
+	{
+		cout << "The item was found." << endl;
 		return root;
+	}
 
 	//1. if value>item but not in tree
 	//   it will print the path it took to find the value 
@@ -575,6 +584,7 @@ int BST::addToArray(BinaryNode* t, int arr[], ItemType size)
 
 	return(t->item);
 }
+
 
 //display tree
 void BST::display()

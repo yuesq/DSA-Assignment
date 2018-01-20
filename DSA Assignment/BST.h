@@ -82,6 +82,7 @@ public:
 	int nodeK(ItemType item);
 	int addToArray(BinaryNode* t, int arr[], ItemType item);
 
+
 	// display the tree
 	void display();
 	void display(BinaryNode *ptr, int level);
