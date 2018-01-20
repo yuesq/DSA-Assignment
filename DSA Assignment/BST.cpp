@@ -350,6 +350,11 @@ void BST::remove(BinaryNode* &t, ItemType value)
 					parent = rebalance();
 				}
 	}
+
+	else
+	{
+		cout << "Sorry! Value not found in tree. Please try again." << endl;
+	}
 }
 
 // traverse the binary search tree in inorder
