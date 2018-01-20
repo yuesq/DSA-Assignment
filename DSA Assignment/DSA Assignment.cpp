@@ -33,28 +33,35 @@ void opt8();
 
 int main()
 {
-	// s is an integer given by the user
-	int s = 0;
+	// s is an integer given by the user ot initialise the tree
+	int s;
+	int m = 0;
 
-	while (s == 0)
+	// will keep asking u for input as long as u enter negative numbers
+	// if decimal is used, a tree is still generated
+	while (m == 0)
 	{
 		cout << "Enter integer to initialise tree: ";
 		cin >> s;
+		bool success = (s > 0) && (s % 1 == 0);
 
-		if ((s > 0) && (s % 1 == 0))
+		if (success)
 		{
+			m = 1; // breaks out of loop
 			break;
 		}
 
-		else if ((s < 0))
+		else if (!success )
 		{
+
 			cout << "You have entered an invalid number. Try again." << endl;
-			s = 0;
-			continue;
-			cin.fail();
 			cin.clear();
 			cin.ignore();
+			cin.fail();
+
 		}
+	}
+
 
 		/* this part of code doesnt work
 		else if (s % 1 != 0)
@@ -68,7 +75,6 @@ int main()
 		}
 		*/
 		
-	}
 
 	//create binary search tree
 	bst.initialise(s);
@@ -193,18 +199,25 @@ void opt5() //display value in node k
 	// k is the kth node that the user wants to find
 	int k;
 
-	// initialise int var
-	// "final" is the value that is returned by the function
-	int final;
-
 	// check if tree is empty
 	// int test = nodeK(k);
 
 	cout << "There are " << count << " nodes in this tree." << endl;
+	cout << "Enter a number between 1 and " << count << endl;
 	cout << "Which node would you like to find? " << endl;
 	cin >> k;
-	final = bst.nodeK(k);
-	cout << "This is the value of the node you wanted to find: " << final << endl;
+	
+	while (k <= 0 || k > count)
+	{
+		k = 0;
+		cin.fail();
+		cin.clear();
+		cin.ignore();
+		cout << "Your input was invalid. Enter a number between 1 and " << count << endl;
+		cin >> k;
+	}
+
+	bst.nodeK(k);
 }
 
 

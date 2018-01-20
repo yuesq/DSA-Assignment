@@ -7,6 +7,7 @@
 #include <cstddef>  // for NULL
 #include <new>      // for bad_alloc
 #include <algorithm>
+#include <vector>
 #include "BST.h"
 
 using namespace std;
@@ -85,6 +86,35 @@ BinaryNode* BST::convert(int (arr[]), int start, int end, BinaryNode* &root)
 	return root;
 }
 
+// convert binary search tree into array
+int BST::addToArray(BinaryNode* t, int arr[], ItemType size)
+{
+
+	if (t == NULL)
+		return 0;
+
+	else
+	{
+		arr[size] = t->item;
+
+		if (t->left != NULL)
+		{
+			addToArray(t->left, arr, size);
+		}
+
+		if (t->right != NULL)
+		{
+			addToArray(t->right, arr, size);
+		}
+
+		arr[size] = t->item;
+		size++;
+	}
+
+	return(t->item);
+}
+
+
 // search an item in the binary search tree
 BinaryNode* BST::search(ItemType value)
 {
@@ -159,7 +189,7 @@ void BST::insert(BinaryNode* &t, ItemType item)
 			newNode->left = NULL;
 			newNode->right = NULL;
 			t = newNode;
-			cout << "Item " << item << " has been added to the tree." << endl;
+			cout << item << " has been added to the tree." << endl;
 		}
 		else if (item < t->item)
 		{
@@ -538,53 +568,44 @@ bool BST::isEmpty()
 	return (root == NULL);
 }
 
-// look for node k
-int BST::nodeK(ItemType size)
+void BST::nodeK(int k)
 {
+	//dynamic queue 
+	vector<BinaryNode*> vec; 
+
 	if (isEmpty())
 	{
-		cout << "The tree is empty." << endl;
-		return 0;
+		cout << "There is no tree." << endl;
+		return;
 	}
 
-	else
+	vec.push_back(root);
+	int front = 0;
+	while (front < vec.size())
 	{
-		// dataArray is an array of values in the BST
-		// convert bst into array
-		int dataArray[10000] = { };
-		int k;
-		k = addToArray(root, dataArray, size);
-		return k;
-	}
-}
-
-int BST::addToArray(BinaryNode* t, int arr[], ItemType size)
-{
-
-	if (t == NULL)
-		return 0;
-
-	else
-	{
-		arr[size] = t->item;
-		
-		if (t->left != NULL)
+		// base case
+		// node k was found
+		if (front == (k -1))
 		{
-			addToArray(t->left, arr, size);
+			cout << "The value of node " << k << " is " << vec[front]->item << endl;
+			return;
 		}
 
-		if (t->right != NULL)
+		else
 		{
-			addToArray(t->right, arr, size);
+			if (vec[front]->left != NULL)
+			{
+				vec.push_back(vec[front]->left);
+			}
+			if (vec[front]->right != NULL)
+			{
+				vec.push_back(vec[front]->right);
+			}
+
 		}
-
-		arr[size] = t->item;
-		size++;
+		front += 1;
 	}
-
-	return(t->item);
 }
-
 
 //display tree
 void BST::display()

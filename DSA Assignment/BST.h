@@ -22,11 +22,13 @@ public:
 	BinaryNode* search(ItemType value);
 	BinaryNode* search(BinaryNode* root, ItemType value);
 
-	//initialise a data array
+	// initialise a data array
 	void initialise(ItemType value);
 
-	//convert array into binary search tree
+	// convert array into binary search tree
 	BinaryNode* convert(int(arr[]), int start, int end, BinaryNode* &root);
+	// convert binary search tree into array
+	int addToArray(BinaryNode* t, int arr[], ItemType item);
 
 	// insert an item to the binary search tree
 	void insert(ItemType item);
@@ -79,8 +81,7 @@ public:
 	bool isBalanced(BinaryNode *t);
 
 	// look for node K
-	int nodeK(ItemType item);
-	int addToArray(BinaryNode* t, int arr[], ItemType item);
+	void nodeK(int n);
 
 
 	// display the tree
