@@ -148,8 +148,7 @@ void opt2() //add a value
 	int v;
 	cout << "Enter value to add: ";
 	cin >> v;
-	BinaryNode *root;
-	root = bst.insert(v);
+	bst.insert(v);
 }
 
 void opt3() //remove a value

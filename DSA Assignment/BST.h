@@ -28,8 +28,8 @@ public:
 	BinaryNode* convert(int(arr[]), int start, int end, BinaryNode* &root);
 
 	// insert an item to the binary search tree
-	BinaryNode* insert(ItemType item);
-	BinaryNode* insert(BinaryNode* &root, ItemType item);
+	void insert(ItemType item);
+	void insert(BinaryNode* &root, ItemType item);
 
 	// create AVL tree from binary search tree
 	// rotations
