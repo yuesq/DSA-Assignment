@@ -15,6 +15,7 @@ public:
 	BST();
 
 	// deconstructor
+	void deconstructor();
 	void deconstructor(BinaryNode* &root);
 
 	// search an item in the binary search tree

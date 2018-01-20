@@ -29,6 +29,7 @@ void opt4();
 void opt5();
 void opt6();
 void opt7();
+void opt8();
 
 int main()
 {
@@ -50,6 +51,7 @@ int main()
 
 		else
 		{
+			cin.fail();
 			cin.clear();
 			cin.ignore();
 			cout << "Input must be valid. Please enter a valid number: ";
@@ -57,7 +59,7 @@ int main()
 		}
 	}
 
-	//create binary search tree
+	// create binary search tree
 	bst.initialise(s);
 	int opt= -1;
 
@@ -86,21 +88,15 @@ int main()
 		{
 			opt4();
 		}
-		//*
+
 		else if (opt ==5)
 		{
 			opt5();
 		}
-		//*/
+
 		else if (opt == 6)
 		{
 			opt6();
-		}
-		
-		else if (opt == 0)
-		{
-			cout << "Thank you!" << endl;
-			break;
 		}
 
 		else if (opt == 7)
@@ -108,6 +104,17 @@ int main()
 			opt7();
 		}
 
+		else if (opt == 8)
+		{
+			opt8();
+		}
+
+		else if (opt == 0)
+		{
+			cout << "Thank you!" << endl;
+			break;
+		}
+		
 		else
 		{
 			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
@@ -131,11 +138,12 @@ void displayMenu()
 	cout << "[5] Display value of node K" << endl;
 	cout << "[6] Check if tree is balanced" << endl;
 	cout << "[7] Display the tree" << endl;
+	cout << "[8] Destroy tree" << endl;
 	cout << "[0] Exit" << endl;
 	cout << "============================================" << endl;
 }
 
-void opt1()	//search for a value
+void opt1()	// search for a value
 {
 	cout << "Enter a value to search: ";
 	cin >> value;
@@ -143,7 +151,7 @@ void opt1()	//search for a value
 
 }
 
-void opt2() //add a value
+void opt2() // add a value
 {
 	int v;
 	cout << "Enter value to add: ";
@@ -151,7 +159,7 @@ void opt2() //add a value
 	bst.insert(v);
 }
 
-void opt3() //remove a value
+void opt3() // remove a value
 {
 	int v;
 	cout << "Enter value to delete: ";
@@ -159,12 +167,12 @@ void opt3() //remove a value
 	bst.remove(v);
 }
 
-void opt4() //display values in ascending order 
+void opt4() // display values in ascending order 
 {
 	bst.inorder();
 }
 
-void opt5() //display value in node k 
+void opt5() // display value in node k 
 {
 	// store the total number of nodes in var
 	int count;
@@ -189,7 +197,7 @@ void opt5() //display value in node k
 }
 
 
-void opt6()	//check if tree is balanced
+void opt6()	// check if tree is balanced
 {
 	bool test = bst.isBalanced();
 	if (test == true)
@@ -201,7 +209,12 @@ void opt6()	//check if tree is balanced
 		cout << "Tree is unbalanced." << endl;
 }
 
-void opt7() //display the tree
+void opt7() // display the tree
 {
 	bst.display();
+}
+
+void opt8() // destroy tree
+{
+	bst.deconstructor();
 }
