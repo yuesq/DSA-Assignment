@@ -102,5 +102,8 @@ public:
 	BinaryNode* BST::deQueue(BinaryNode **queue, int *front);
 	BinaryNode* BST::newNode(int data);
 
+	// node k vector method
+	void nodeK(int k);
+
 };
 

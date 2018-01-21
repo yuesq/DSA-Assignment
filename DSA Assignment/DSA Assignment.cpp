@@ -186,6 +186,7 @@ void opt5() //display value in node k
 		cout << "Enter any number between 1 and " << count << " to display the value within the node: ";
 		cin >> k;
 		bst.levelOrder(k);
+		//bst.nodeK(k);
 	}
 
 }

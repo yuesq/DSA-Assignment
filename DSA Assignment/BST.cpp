@@ -610,6 +610,8 @@ BinaryNode* BST::newNode(int data)
 	return(node);
 }
 
+//OPTION 5 - VECTOR METHOD
+
 //OPTION 6 - CHECK IF TREE IS BALANCED 
 // compute the height of the binary search tree
 int BST::getHeight()
@@ -742,3 +744,42 @@ int BST::countNodes(BinaryNode* t)
 		return 1 + countNodes(t->left) + countNodes(t->right);
 }
 
+//OPTION 5 - VECTOR METHOD
+//unused because this uses the c++ standars library
+void BST::nodeK(int k)
+{
+	//vectors act as dynamic queues
+	vector <BinaryNode*> queue;
+
+	if (isEmpty())
+	{
+		cout << "There is no tree." << endl;
+		return;
+	}
+
+	queue.push_back(root);
+	int front = 0;
+	while (front < queue.size())
+	{
+		// base case
+		// when node k is found
+		if (front == (k - 1))
+		{
+			cout << "The value of the node " << k << " is " << queue[front]->item << endl;
+			return;
+		}
+		else
+		{
+			if (queue[front]->left != NULL)
+			{
+				queue.push_back(queue[front]->left);
+			}
+
+			if (queue[front]->right != NULL)
+			{
+				queue.push_back(queue[front]->right);
+			}
+		}
+		front += 1;
+	}
+}
