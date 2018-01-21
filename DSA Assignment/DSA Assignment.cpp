@@ -201,7 +201,7 @@ void opt5() //display value in node k
 void opt5() //display value in node k
 {
 	int k;
-	cout << "Enter the node number u wna see: ";
+	cout << "Enter the node number (K) to display value in it: ";
 	cin >> k;
 	bst.levelOrder(k);
 }
