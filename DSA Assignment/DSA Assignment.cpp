@@ -39,11 +39,18 @@ int main()
 {
 	opt9();
 
-	int opt= -1;
+	int opt;
 
-	while (opt != 0)
+	displayMenu();
+	cout << "Enter option: ";
+	cin >> opt;
+
+	while (opt != 0 || !(cin >> opt))
 	{
 		displayMenu();
+		cin.clear();
+		cin.ignore();
+		cin.fail();
 		cout << "Enter option: ";
 		cin >> opt;
 
@@ -96,10 +103,16 @@ int main()
 			opt9();
 		}
 
+		else if (!cin >> opt)
+		{
+			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
+		}
+
 		else
 		{
 			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
 		}
+
 			
 	}
 
@@ -153,50 +166,6 @@ void opt4() //display values in ascending order
 	bst.inorder();
 }
 
-/*
-void opt5() //display value in node k 
-{
-	// store the total number of nodes in var
-	int count;
-	//Queue q;
-	// intialise int value of k
-	// k is the kth node that the user wants to find
-	int k;
-
-	// check if tree is empty
-	// int test = nodeK(k);
-	count = bst.countNodes();
-
-	cout << "There are " << count << " nodes in this tree." << endl;
-	cout << "Enter a number between 1 and " << count << endl;
-	cout << "Which node would you like to find? " << endl;
-	cin >> k;
-	bool fail = (k <= 0 || k > count);
-
-	while (fail)
-	{
-		k = 0;
-		cin.fail();
-		cin.clear();
-		cin.ignore();
-		cout << "Your input was invalid. Enter a number between 1 and " << count << endl;
-		cin >> k;
-	}
-
-	if (!fail)
-	{
-		bst.nodeK(k);
-		//bst.printLevel(q);
-		//cout << "The value of the " << k << "th node is = " << q.findK(k) << endl;
-	}
-	else
-	{
-
-	}
-}
-*/
-
-
 //kth node
 void opt5() //display value in node k
 {
@@ -245,22 +214,20 @@ void opt9()
 			if (success)
 			{
 				m = 1; // breaks out of loop
+				bst.initialise(s);
+				cout << "Your tree has been created." << endl;
 				break;
 			}
 
 			else if (!success)
 			{
 
-				cout << "You have entered an invalid number. Try again." << endl;
+				cout << "You have entered an invalid input. Try again." << endl;
 				cin.clear();
 				cin.ignore();
 				cin.fail();
-
 			}
 		}
-
-		bst.initialise(s);
-		cout << "Your tree has been created." << endl;
 	}
 
 	else
