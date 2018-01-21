@@ -543,6 +543,7 @@ void BST::levelOrder(int target)
 	if (target > countNodes() || target < 0)
 	{
 		cout << "Sorry, you have entered an invalid input." << endl;
+		return;
 	}
 	else
 		levelOrder(root, target);

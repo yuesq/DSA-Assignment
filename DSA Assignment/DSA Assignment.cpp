@@ -180,19 +180,11 @@ void opt5() //display value in node k
 		cout << "There are no items in the tree." << endl;
 	}
 	
-	LOOP: do
+	else
 	{
 		cout << "There are " << count << " nodes in the tree." << endl;
 		cout << "Enter any number between 1 and " << count << " to display the value within the node: ";
-		cin.fail();
-		cin.clear();
-		cin.ignore();
 		cin >> k;
-
-	} while (!success);
-
-	if (success)
-	{
 		bst.levelOrder(k);
 	}
 
