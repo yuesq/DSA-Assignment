@@ -2,10 +2,7 @@
 #pragma once
 #include "stdafx.h"
 #include<iostream>
-<<<<<<< HEAD
 //#include <sstream>
-=======
->>>>>>> parent of c0e4265... remove was fixed
 #include <string>
 #include <cmath>
 #include <cstddef>  // for NULL
@@ -13,11 +10,8 @@
 #include <algorithm>
 #include <vector>
 #include "BST.h"
-<<<<<<< HEAD
 //#include "Queue.h"
 
-=======
->>>>>>> parent of c0e4265... remove was fixed
 
 using namespace std;
 
@@ -664,7 +658,6 @@ void BST::display(BinaryNode *ptr, int level)
 	}
 }
 
-<<<<<<< HEAD
 /*
 void BST::printLevel(Queue &q)
 {
@@ -724,6 +717,3 @@ void BST::printLevelOrder(BinaryNode* root, int depth) {
 	}
 }
 */
-=======
-
->>>>>>> parent of c0e4265... remove was fixed

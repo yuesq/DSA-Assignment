@@ -12,12 +12,9 @@
 #pragma once
 #include "stdafx.h"
 #include <iostream>
-#include <string>
 #include "BST.h"
-<<<<<<< HEAD
 //#include "Queue.h"
-=======
->>>>>>> parent of c0e4265... remove was fixed
+
 using namespace std;
 
 BST bst;
@@ -102,7 +99,6 @@ int main()
 			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
 		}
 			
-			
 	}
 
 	system ("PAUSE");
@@ -159,25 +155,22 @@ void opt5() //display value in node k
 {
 	// store the total number of nodes in var
 	int count;
-<<<<<<< HEAD
 	//Queue q;
-=======
->>>>>>> parent of c0e4265... remove was fixed
-	count = bst.countNodes();
-
 	// intialise int value of k
 	// k is the kth node that the user wants to find
 	int k;
 
 	// check if tree is empty
 	// int test = nodeK(k);
+	count = bst.countNodes();
 
 	cout << "There are " << count << " nodes in this tree." << endl;
 	cout << "Enter a number between 1 and " << count << endl;
 	cout << "Which node would you like to find? " << endl;
 	cin >> k;
-	
-	while (k <= 0 || k > count)
+	bool fail = (k <= 0 || k > count);
+
+	while (fail)
 	{
 		k = 0;
 		cin.fail();
@@ -187,19 +180,17 @@ void opt5() //display value in node k
 		cin >> k;
 	}
 
-<<<<<<< HEAD
 	if (!fail)
 	{
 		bst.nodeK(k);
 		//bst.printLevel(q);
 		//cout << "The value of the " << k << "th node is = " << q.findK(k) << endl;
 	}
+	else
+	{
 
-=======
-	bst.nodeK(k);
->>>>>>> parent of c0e4265... remove was fixed
+	}
 }
-
 
 void opt6()	//check if tree is balanced
 {
