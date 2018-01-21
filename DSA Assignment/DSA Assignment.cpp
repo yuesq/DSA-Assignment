@@ -40,11 +40,14 @@ int main()
 	opt9();
 
 	int opt = -1;
-
+	
 	while (opt != 0)
 	{
 		displayMenu();
 		cout << "Enter option: ";
+		cin.fail();
+		cin.clear();
+		cin.ignore();
 		cin >> opt;
 
 		if (opt == 1)
@@ -96,6 +99,11 @@ int main()
 			opt9();
 		}
 
+		else if ((!cin) || opt % 1 != 0)
+		{
+			cout << "Sorry, you have entered an invalid input. Please try again." << endl;
+		}
+
 		else 
 		{
 			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
@@ -128,8 +136,22 @@ void opt1()	//search for a value
 {
 	cout << "Enter a value to search: ";
 	cin >> value;
-	bst.search(value);
+	BinaryNode* test = bst.search2(value);
 
+	if (test!=NULL)
+	{
+		bst.search(value);
+	}
+
+	else if (value > 0)
+	{
+		cout << "Sorry, the number does not exist in the tree." << endl;
+	}
+	
+	else
+	{
+		cout << "Sorry, you have entered an invalid input. Please enter a positive integer." << endl;
+	}
 }
 
 void opt2() //add a value
@@ -137,7 +159,17 @@ void opt2() //add a value
 	int v;
 	cout << "Enter value to add: ";
 	cin >> v;
-	bst.insert(v);
+
+	
+	if (cin.good() && v > 0)
+	{
+		bst.insert(v);
+	}
+
+	else
+	{
+		cout << "Sorry, you have entered an invalid input. Please enter a positive integer." << endl;
+	}
 }
 
 void opt3() //remove a value
@@ -145,71 +177,70 @@ void opt3() //remove a value
 	int v;
 	cout << "Enter value to delete: ";
 	cin >> v;
-	BinaryNode* test;
-	test = bst.search2(v);
-	
-	if (test != NULL)
-	{
-		bst.remove(v);
-		cout << value << " has been removed from the tree.";
-	}
-
-	else
-	{
-		cout << "Sorry, the item does not exist in the tree." << endl;
-	}
-
+	bst.remove(v);
 }
 
 void opt4() //display values in ascending order 
 {
+	//error checking done within function in BST.cpp
 	bst.inorder();
 }
 
 //kth node
 void opt5() //display value in node k
 {
-	int k = 1;
+	int k = -1;
 	int count;
 	count = bst.countNodes();
-	bool empty = bst.isEmpty();
+
+	cout << "There are " << count << " nodes in the tree." << endl;
+	cout << "Enter any number between 1 and " << count << " to display the value within the node: ";
+	cin >> k;
+
 	bool success = (k > 0 && k <= count);
-	
-	if (empty)
+	bool empty = bst.isEmpty();
+
+	if (success && !empty)
 	{
-		cout << "There are no items in the tree." << endl;
-	}
-	
-	else
-	{
-		cout << "There are " << count << " nodes in the tree." << endl;
-		cout << "Enter any number between 1 and " << count << " to display the value within the node: ";
-		cin >> k;
+		// error checking done within function
 		bst.levelOrder(k);
 		//bst.nodeK(k);
+	}
+	else
+	{
+		cout << "Sorry, you have entered an invalid input Please enter a positive integer." << endl;
 	}
 
 }
 
 void opt6()	//check if tree is balanced
 {
-	bool test = bst.isBalanced();
-	if (test == true)
+	if (bst.isEmpty())
 	{
-		cout << "Tree is balanced." << endl;
+		cout << "The tree is empty." << endl;
 	}
-
 	else
-		cout << "Tree is unbalanced." << endl;
+	{
+		bool test = bst.isBalanced();
+		if (test == true)
+		{
+			cout << "Tree is balanced." << endl;
+		}
+
+		else
+			cout << "Tree is unbalanced." << endl;
+	}
 }
 
 void opt7() //display the tree
 {
+	// error checking is done within the function
 	bst.display();
 }
 
 void opt8()
 {
+	// error checking is done within the function
 	bst.deconstructor();
 }
 
@@ -235,7 +266,7 @@ void opt9()
 				break;
 			}
 
-			else if (!success)
+			else if ((!success) || s == 0)
 			{
 
 				cout << "You have entered an invalid input. Try again." << endl;
