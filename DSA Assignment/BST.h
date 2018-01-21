@@ -102,13 +102,5 @@ public:
 	BinaryNode* BST::deQueue(BinaryNode **queue, int *front);
 	BinaryNode* BST::newNode(int data);
 
-	/*
-	void printLevel(Queue &q);
-	void printLevel(BinaryNode* t, Queue &q);
-	void BST::printGivenLevel(BinaryNode* t, int level, Queue &q);
-	void BST::printLevelOrder(int depth);
-	void BST::printLevelOrder(BinaryNode* t, int depth);
-	*/
-
 };
 

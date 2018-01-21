@@ -540,7 +540,12 @@ void BST::postorder(BinaryNode* t)
 //kth node
 void BST::levelOrder(int target)
 {
-	levelOrder(root, target);
+	if (target > countNodes() || target < 0)
+	{
+		cout << "Sorry, you have entered an invalid input." << endl;
+	}
+	else
+		levelOrder(root, target);
 }
 
 void BST::levelOrder(BinaryNode* t, int target)
@@ -552,6 +557,7 @@ void BST::levelOrder(BinaryNode* t, int target)
 	while (temp_node)
 	{
 		count++;
+		//base case
 		if (target == count)
 		{
 			cout << "The value inside the node is " << temp_node->item << "." << endl;
