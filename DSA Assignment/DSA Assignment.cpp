@@ -9,12 +9,12 @@
 //PO2
 
 // DSA Assignment.cpp : Defines the entry point for the console application.
-
+#pragma once
 #include "stdafx.h"
 #include <iostream>
 #include <string>
 #include "BST.h"
-#include "Queue.h"
+//#include "Queue.h"
 using namespace std;
 
 BST bst;
@@ -156,7 +156,7 @@ void opt5() //display value in node k
 {
 	// store the total number of nodes in var
 	int count;
-	Queue q;
+	//Queue q;
 	count = bst.countNodes();
 
 	// intialise int value of k
@@ -183,11 +183,11 @@ void opt5() //display value in node k
 
 	if (!fail)
 	{
-		bst.printLevel(q);
-		cout << "The value of the " << k << "th node is = " << q.findK(k) << endl;
+		bst.nodeK(k);
+		//bst.printLevel(q);
+		//cout << "The value of the " << k << "th node is = " << q.findK(k) << endl;
 	}
 
-	//bst.nodeK(k);
 }
 
 

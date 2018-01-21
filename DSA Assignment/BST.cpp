@@ -1,8 +1,8 @@
 // BST.cpp
-
+#pragma once
 #include "stdafx.h"
 #include<iostream>
-#include <sstream>
+//#include <sstream>
 #include <string>
 #include <cmath>
 #include <cstddef>  // for NULL
@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <vector>
 #include "BST.h"
-#include "Queue.h"
+//#include "Queue.h"
 
 
 using namespace std;
@@ -433,6 +433,7 @@ void BST::remove(BinaryNode* &t, ItemType value)
 			}
 			root = rebalance();
 		}
+		cout << value << " has been removed from the tree." << endl;
 	}
 
 	else
@@ -667,6 +668,7 @@ void BST::display(BinaryNode *ptr, int level)
 	}
 }
 
+/*
 void BST::printLevel(Queue &q)
 {
 	return printLevel(root, q);
@@ -724,4 +726,4 @@ void BST::printLevelOrder(BinaryNode* root, int depth) {
 		cout << levelNodes << endl;
 	}
 }
-
+*/
