@@ -1,5 +1,5 @@
 // BinaryNode.h
-
+#pragma once
 typedef int ItemType;
 
 struct BinaryNode
@@ -8,4 +8,3 @@ struct BinaryNode
 	BinaryNode *left;	// pointer pointing to left subtree
 	BinaryNode *right;	// pointer pointing to right subtree
 };
-

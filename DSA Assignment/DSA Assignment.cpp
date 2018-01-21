@@ -13,7 +13,6 @@
 #include "stdafx.h"
 #include <iostream>
 #include "BST.h"
-//#include "Queue.h"
 
 using namespace std;
 
@@ -143,7 +142,19 @@ void opt3() //remove a value
 	int v;
 	cout << "Enter value to delete: ";
 	cin >> v;
-	bst.remove(v);
+	BinaryNode* test;
+	test = bst.search2(v);
+	if (test != NULL)
+	{
+		cout << "The value " << v << " has been removed from the tree." << endl;
+		bst.remove(v);
+	}
+	else
+	{
+		cout << "Sorry, the item does not exist in the tree." << endl;
+	}
+
+
 }
 
 void opt4() //display values in ascending order 
@@ -183,12 +194,7 @@ void opt5() //display value in node k
 	if (!fail)
 	{
 		bst.nodeK(k);
-		//bst.printLevel(q);
 		//cout << "The value of the " << k << "th node is = " << q.findK(k) << endl;
-	}
-	else
-	{
-
 	}
 }
 
