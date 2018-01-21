@@ -27,6 +27,10 @@ public:
 	BinaryNode* search(ItemType value);
 	BinaryNode* search(BinaryNode* root, ItemType value);
 
+	// search function used for remove function checking
+	BinaryNode* search2(ItemType value);
+	BinaryNode* search2(BinaryNode* root, ItemType value);
+
 	// initialise a data array
 	void initialise(ItemType value);
 
@@ -84,7 +88,6 @@ public:
 	// check if the binary search tree is balanced
 	bool isBalanced();
 	bool isBalanced(BinaryNode *t);
-
 
 	// display the tree
 	void display();

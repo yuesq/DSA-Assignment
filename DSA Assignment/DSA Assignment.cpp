@@ -158,7 +158,20 @@ void opt3() //remove a value
 	int v;
 	cout << "Enter value to delete: ";
 	cin >> v;
-	bst.remove(v);
+	BinaryNode* test;
+	test = bst.search2(v);
+	
+	if (test != NULL)
+	{
+		bst.remove(v);
+		cout << value << " has been removed from the tree.";
+	}
+
+	else
+	{
+		cout << "Sorry, the item does not exist in the tree." << endl;
+	}
+
 }
 
 void opt4() //display values in ascending order 

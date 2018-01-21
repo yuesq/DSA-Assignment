@@ -181,7 +181,39 @@ BinaryNode* BST::search(BinaryNode* root, ItemType value)
 	
 }
 
+//OPTION 3 - TO CHECK IF ITEM IS REMOVABLE BEFORE REMOVING IT
+// search for existence of item in binary search tree
+BinaryNode* BST::search2(ItemType value)
+{
+	return search2(root, value);
+}
 
+BinaryNode* BST::search2(BinaryNode* t, ItemType value)
+{
+	// item was not found
+	if (t == NULL)
+		return NULL;
+	else
+	{
+		// item has been found
+		if (t->item == value)
+		{
+			return t;
+		}
+		else
+			// search in left subtree
+			if (value < t->item)
+			{
+				return search2(t->left, value);
+			}
+			
+			// search in right subtree
+			else
+			{
+				return search2(t->right, value);
+			}
+	}
+}
 
 //AVL ROTATION FOR OPTION 2 AND 3 (ADDING AND REMOVING ITEM)
 //Balance BST tree to make it AVL
@@ -433,7 +465,6 @@ void BST::remove(BinaryNode* &t, ItemType value)
 				current->item = n;
 			}
 		}
-		cout << value << " has been removed from the tree." << endl;
 	}
 
 	else
@@ -694,64 +725,11 @@ void BST::display(BinaryNode *ptr, int level)
 	}
 }
 
-
-
 // check if the binary search tree is empty
 bool BST::isEmpty()
 {
 	return (root == NULL);
 }
-
-
-
-
-/*
-void BST::nodeK(int k)
-{
-	//dynamic queue 
-	vector<BinaryNode*> vec; 
-
-	if (isEmpty())
-	{
-		cout << "There is no tree." << endl;
-		return;
-	}
-
-	vec.push_back(root);
-	int front = 0;
-	while (front < vec.size())
-	{
-		// base case
-		// node k was found
-		if (front == (k -1))
-		{
-			cout << "The value of node " << k << " is " << vec[front]->item << endl;
-			return;
-		}
-
-		else
-		{
-			if (vec[front]->left != NULL)
-			{
-				vec.push_back(vec[front]->left);
-			}
-			if (vec[front]->right != NULL)
-			{
-				vec.push_back(vec[front]->right);
-			}
-
-		}
-		front += 1;
-	}
-}
-*/
-
-
-
-
-
-
-
 
 // count the number of nodes in the binary search tree
 int BST::countNodes()
@@ -767,65 +745,3 @@ int BST::countNodes(BinaryNode* t)
 		return 1 + countNodes(t->left) + countNodes(t->right);
 }
 
-
-
-
-/*
-void BST::printLevel(Queue &q)
-{
-	return printLevel(root, q);
-}
-
-void BST::printLevel(BinaryNode *t, Queue &q) {
-	int h = getHeight(t);
-	for (int i = 1; i <= h; i++)
-		printGivenLevel(t, i, q);
-}
-
-string printTree(BinaryNode *root, int level, string gap) {
-	if (level == 1) {
-		if (root == 0) {
-			return gap + "-" + gap;
-		}
-		stringstream out;
-		out << root->item;
-		return gap + out.str() + gap;
-	}
-	else if (level>1) {
-		string leftStr = printTree(root ? root->left : 0, level - 1, gap);
-		string rightStr = printTree(root ? root->right : 0, level - 1, gap);
-
-		return leftStr + " " + rightStr;
-	}
-	else return "";
-}
-
-void BST::printGivenLevel(BinaryNode* t, int level, Queue &q)
-{
-	if (t == NULL)
-		return;
-	if (level == 1)
-	{
-		q.enqueue(t->item);
-	}
-	else if (level > 1)
-	{
-		printGivenLevel(t->left, level - 1, q);
-		printGivenLevel(t->right, level - 1, q);
-	}
-}
-void BST::printLevelOrder(int depth) {
-	printLevelOrder(root, depth);
-}
-
-void BST::printLevelOrder(BinaryNode* root, int depth) {
-	for (int i = 1; i <= depth; i++) {
-		string gap = "";
-		for (int j = 0; j<pow(2, depth - i) - 1; j++) {
-			gap += " ";
-		}
-		string levelNodes = printTree(root, i, gap);
-		cout << levelNodes << endl;
-	}
-}
-*/
