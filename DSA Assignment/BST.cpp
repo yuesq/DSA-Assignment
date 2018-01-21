@@ -557,15 +557,7 @@ void BST::levelOrder(BinaryNode* t, int target)
 			cout << "The value inside the node is " << temp_node->item << "." << endl;
 			break;
 		}
-
-		/*else
-		{
-			break;
-			cout << "The there is no such node number" << endl;
-			break;
-		}*/
 	
-
 		/*Enqueue left child */
 		if (temp_node->left)
 			enQueue(queue, &rear, temp_node->left);

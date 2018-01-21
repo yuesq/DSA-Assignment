@@ -96,11 +96,10 @@ int main()
 			opt9();
 		}
 
-		else if (!(cin >> opt) || opt < 0 || opt > 9)
+		else 
 		{
 			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
 		}
-
 			
 	}
 
