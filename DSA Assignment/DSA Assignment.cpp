@@ -39,11 +39,7 @@ int main()
 {
 	opt9();
 
-	int opt;
-
-	displayMenu();
-	cout << "Enter option: ";
-	cin >> opt;
+	int opt = -1;
 
 	while (opt != 0)
 	{
@@ -100,8 +96,7 @@ int main()
 			opt9();
 		}
 
-
-		else
+		else if (!(cin >> opt) || opt < 0 || opt > 9)
 		{
 			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
 		}

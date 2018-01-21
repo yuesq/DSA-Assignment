@@ -554,9 +554,7 @@ void BST::levelOrder(BinaryNode* t, int target)
 		count++;
 		if (target == count)
 		{
-			cout << temp_node->item;
-			break;
-			cout << "Enter the number within the number of node.";
+			cout << "The value inside the node is " << temp_node->item << "." << endl;
 			break;
 		}
 
