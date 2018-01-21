@@ -2,6 +2,7 @@
 #pragma once
 #include "stdafx.h"
 #include<iostream>
+//#include <sstream>
 #include <string>
 #include <cmath>
 #include <cstddef>  // for NULL
@@ -9,7 +10,7 @@
 #include <algorithm>
 #include <vector>
 #include "BST.h"
-//#include<malloc.h>
+//#include "Queue.h"
 
 
 using namespace std;
@@ -174,37 +175,6 @@ BinaryNode* BST::search(BinaryNode* root, ItemType value)
 		}
 	}
 	
-}
-
-// search an item without any displays
-// used within remove function
-BinaryNode* BST::search2(ItemType value)
-{
-	return search2(root, value);
-}
-
-BinaryNode* BST::search2(BinaryNode* t, ItemType value)
-{
-	if (t == NULL)
-		// item not found
-		return NULL;
-	else
-	{
-		if (t->item == value)	// item found
-		{
-			return t;
-		}
-		else
-			if (value < t->item)	// search in left subtree
-			{
-				return search2(t->left, value);
-			}
-			else // search in right subtree
-			{
-				return search2(t->right, value);
-			}
-	}
-
 }
 
 // insert an item to the binary search tree
@@ -453,6 +423,12 @@ void BST::remove(BinaryNode* &t, ItemType value)
 				current->item = n;
 			}
 		}
+		cout << value << " has been removed from the tree." << endl;
+	}
+
+	else
+	{
+		cout << "Sorry, the item does not exist in the tree." << endl;
 	}
 	
 }
@@ -612,7 +588,6 @@ bool BST::isEmpty()
 	return (root == NULL);
 }
 
-//vector method of finding kth node
 void BST::nodeK(int k)
 {
 	//dynamic queue 
@@ -683,95 +658,62 @@ void BST::display(BinaryNode *ptr, int level)
 	}
 }
 
-// opt 5 crap
 /*
-// data  structure: binarynode
-// allocates memory space for nodes using malloc
-struct BinaryNode* BST::newnode(int data)
+void BST::printLevel(Queue &q)
 {
-	struct BinaryNode* newnode = (struct BinaryNode *)malloc(sizeof(struct BinaryNode));
-
-	newnode->item = data;
-	newnode->left = NULL;
-	newnode->right = NULL;
-	return newnode;
+	return printLevel(root, q);
 }
 
-// create front node and back node ptr variables
-struct queue *front = NULL;
-struct queue *rear = NULL;
-
-// enqueue binarynodes into queue
-void BST::enqueue(struct BinaryNode *root)
-{
-	struct queue *q = (struct queue*)malloc(sizeof(struct queue));
-	q->next = NULL;
-	q->ptr = root;
-
-	if (front == NULL && rear == NULL)
-	{
-		front = q;
-		rear = q;
-	}
-	else
-	{
-		rear->next = q;
-		rear = q;
-	}
+void BST::printLevel(BinaryNode *t, Queue &q) {
+	int h = getHeight(t);
+	for (int i = 1; i <= h; i++)
+		printGivenLevel(t, i, q);
 }
 
-// data structure to dequeue binarynodes
-struct BinaryNode* BST::dequeue()
-{
-
-	struct queue*temp = NULL;
-
-	if (front == NULL)
-	{
-		return NULL;
-	}
-	else
-	{
-		temp = front;
-		front = front->next;
-		temp->next = NULL;
-
-
-		if (front == NULL)  //Important
-		{
-			rear = NULL;
+string printTree(BinaryNode *root, int level, string gap) {
+	if (level == 1) {
+		if (root == 0) {
+			return gap + "-" + gap;
 		}
+		stringstream out;
+		out << root->item;
+		return gap + out.str() + gap;
 	}
+	else if (level>1) {
+		string leftStr = printTree(root ? root->left : 0, level - 1, gap);
+		string rightStr = printTree(root ? root->right : 0, level - 1, gap);
 
-	return temp->ptr;
-};
-
-void BST::printLevel()
-{
-	printLevelOrder(root);
+		return leftStr + " " + rightStr;
+	}
+	else return "";
 }
 
-void BST::printLevelOrder(BinaryNode *root)
+void BST::printGivenLevel(BinaryNode* t, int level, Queue &q)
 {
-	struct BinaryNode *temp = root;
-
-	while (temp != NULL)
+	if (t == NULL)
+		return;
+	if (level == 1)
 	{
-		cout << temp->item << " ";
-
-		if (temp->left != NULL)
-		{
-			enqueue(temp->left);
-		}
-
-		if (temp->right != NULL)
-		{
-			enqueue(temp->right);
-		}
-
-		temp = dequeue();
+		q.enqueue(t->item);
 	}
+	else if (level > 1)
+	{
+		printGivenLevel(t->left, level - 1, q);
+		printGivenLevel(t->right, level - 1, q);
+	}
+}
+void BST::printLevelOrder(int depth) {
+	printLevelOrder(root, depth);
+}
 
-	
+void BST::printLevelOrder(BinaryNode* root, int depth) {
+	for (int i = 1; i <= depth; i++) {
+		string gap = "";
+		for (int j = 0; j<pow(2, depth - i) - 1; j++) {
+			gap += " ";
+		}
+		string levelNodes = printTree(root, i, gap);
+		cout << levelNodes << endl;
+	}
 }
 */

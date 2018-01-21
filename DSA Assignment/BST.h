@@ -2,9 +2,10 @@
 // BST.h
 
 #include "BinaryNode.h"
-//#include <malloc.h>
+
 #include <unordered_map>
 #include <algorithm>
+#include <type_traits>
 //#include "Queue.h"
 
 class BST
@@ -25,11 +26,6 @@ public:
 	// search an item in the binary search tree
 	BinaryNode* search(ItemType value);
 	BinaryNode* search(BinaryNode* root, ItemType value);
-
-	// search an item without any displays
-	// used within remove function
-	BinaryNode* search2(ItemType value);
-	BinaryNode* search2(BinaryNode* root, ItemType value);
 
 	// initialise a data array
 	void initialise(ItemType value);
@@ -92,18 +88,10 @@ public:
 	// look for node K
 	void nodeK(int n);
 
+
 	// display the tree
 	void display();
 	void display(BinaryNode *ptr, int level);
-
-	// opt 5 crap
-	/*
-	// node k
-	void enqueue(struct BinaryNode *root);
-	struct BinaryNode* dequeue();
-	struct BinaryNode* newnode(int data);
-	void printLevel();
-	void printLevelOrder(BinaryNode *root);
 
 	/*
 	void printLevel(Queue &q);
