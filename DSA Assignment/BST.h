@@ -85,15 +85,12 @@ public:
 	bool isBalanced();
 	bool isBalanced(BinaryNode *t);
 
-	// look for node K
-	void nodeK(int n);
-
 
 	// display the tree
 	void display();
 	void display(BinaryNode *ptr, int level);
 
-	//kth node
+	//to display value in node k 
 	void BST::levelOrder(int target);
 	void BST::levelOrder(BinaryNode* n, int target);
 

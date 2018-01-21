@@ -529,6 +529,13 @@ void BST::levelOrder(BinaryNode* t, int target)
 			break;
 		}
 
+		/*else
+		{
+			break;
+			cout << "The there is no such node number" << endl;
+			break;
+		}*/
+	
 
 		/*Enqueue left child */
 		if (temp_node->left)
