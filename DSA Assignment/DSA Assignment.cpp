@@ -30,54 +30,12 @@ void opt5();
 void opt6();
 void opt7();
 void opt8();
+void opt9();
 
 int main()
 {
-	// s is an integer given by the user ot initialise the tree
-	int s;
-	int m = 0;
+	opt9();
 
-	// will keep asking u for input as long as u enter negative numbers
-	// if decimal is used, a tree is still generated
-	while (m == 0)
-	{
-		cout << "Enter integer to initialise tree: ";
-		cin >> s;
-		bool success = (s > 0) && (s % 1 == 0);
-
-		if (success)
-		{
-			m = 1; // breaks out of loop
-			break;
-		}
-
-		else if (!success )
-		{
-
-			cout << "You have entered an invalid number. Try again." << endl;
-			cin.clear();
-			cin.ignore();
-			cin.fail();
-
-		}
-	}
-
-
-		/* this part of code doesnt work
-		else if (s % 1 != 0)
-		{
-			cout << "You have entered an invalid number. Try again." << endl;
-			s = 0;
-			cin.fail();
-			cin.clear();
-			cin.ignore();
-			cin >> s;
-		}
-		*/
-		
-
-	//create binary search tree
-	bst.initialise(s);
 	int opt= -1;
 
 	while (opt != 0)
@@ -105,12 +63,10 @@ int main()
 		{
 			opt4();
 		}
-		//*
 		else if (opt ==5)
 		{
 			opt5();
 		}
-		//*/
 		else if (opt == 6)
 		{
 			opt6();
@@ -130,6 +86,11 @@ int main()
 		else if (opt == 8)
 		{
 			opt8();
+		}
+
+		else if (opt == 9)
+		{
+			opt9();
 		}
 
 		else
@@ -156,6 +117,7 @@ void displayMenu()
 	cout << "[6] Check if tree is balanced" << endl;
 	cout << "[7] Display the tree" << endl;
 	cout << "[8] Destroy the tree" << endl;
+	cout << "[9] Create a new Tree" << endl;
 	cout << "[0] Exit" << endl;
 	cout << "============================================" << endl;
 }
@@ -241,4 +203,45 @@ void opt7() //display the tree
 void opt8()
 {
 	bst.deconstructor();
+}
+
+void opt9()
+{
+	bool test = bst.isEmpty();
+	if (test)
+	{
+		int m = 0;
+		int s;
+
+		while (m == 0)
+		{
+			cout << "Enter integer to initialise tree: ";
+			cin >> s;
+			bool success = (s > 0) && (s % 1 == 0);
+
+			if (success)
+			{
+				m = 1; // breaks out of loop
+				break;
+			}
+
+			else if (!success)
+			{
+
+				cout << "You have entered an invalid number. Try again." << endl;
+				cin.clear();
+				cin.ignore();
+				cin.fail();
+
+			}
+		}
+
+		bst.initialise(s);
+		cout << "Your tree has been created." << endl;
+	}
+
+	else
+	{
+		cout << "Sorry, you already have a tree. Destroy the tree before creating a new one. " << endl;
+	}
 }
