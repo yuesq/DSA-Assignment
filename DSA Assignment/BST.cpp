@@ -11,12 +11,12 @@
 #include <vector>
 #include "BST.h"
 //#include "Queue.h"
-
-
+#define MAX_Q_SIZE 500
 using namespace std;
 
 #define max(x,y) ((x > y) ? x : y)
 #define min(x,y) ((x < y) ? x : y)
+
 
 // constructor
 BST::BST()
@@ -24,6 +24,7 @@ BST::BST()
 	root = NULL;
 }
 
+//OPTION 8 - TO DESTROY THE TREE  
 // deconstructor
 void BST::deconstructor()
 {
@@ -52,6 +53,8 @@ void BST::deconstructor(BinaryNode* &root)
 	}
 }
 
+
+//START OF PROGRAM 
 // initialise values and insert into tree
 void BST::initialise(ItemType value)
 {
@@ -118,6 +121,7 @@ int BST::addToArray(BinaryNode* t, int arr[], ItemType size)
 }
 
 
+//OPTION 1 - TO SEARCH FOR ITEM 
 // search an item in the binary search tree
 BinaryNode* BST::search(ItemType value)
 {
@@ -177,40 +181,9 @@ BinaryNode* BST::search(BinaryNode* root, ItemType value)
 	
 }
 
-// insert an item to the binary search tree
-void BST::insert(ItemType item)
-{
-	insert(root, item);
-}
 
-void BST::insert(BinaryNode* &t, ItemType item)
-{
-		if (t == NULL)
-		{
-			BinaryNode *newNode = new BinaryNode;
-			newNode->item = item;
-			newNode->left = NULL;
-			newNode->right = NULL;
-			t = newNode;
-			cout << item << " has been added to the tree." << endl;
-		}
-		else if (item < t->item)
-		{
-			insert(t->left, item);  // insert in left subtree
-			t = rebalance(t);
-		}
-		else if (item > t->item)
-		{
-			insert(t->right, item); // insert in right subtree
-			t = rebalance(t);
-		}
-		else
-		{
-			cout << "Item already exists in tree. Item cannot be added to the tree." << endl;
-			return;
-		}
-}
 
+//AVL ROTATION FOR OPTION 2 AND 3 (ADDING AND REMOVING ITEM)
 //Balance BST tree to make it AVL
 BinaryNode* BST::rebalance()
 {
@@ -260,10 +233,8 @@ BinaryNode* BST::rebalance(BinaryNode *t)
 		}
 		return t;
 	}
-	
-}
 
-//AVL rotations
+}
 // right right rotation
 BinaryNode *BST::rr_rotation(BinaryNode *root)
 {
@@ -308,6 +279,44 @@ BinaryNode *BST::rl_rotation(BinaryNode *parent)
 	return rr_rotation(root);
 }
 
+
+//OPTION 2 - TO ADD ITEM  
+// insert an item to the binary search tree
+void BST::insert(ItemType item)
+{
+	insert(root, item);
+}
+
+void BST::insert(BinaryNode* &t, ItemType item)
+{
+		if (t == NULL)
+		{
+			BinaryNode *newNode = new BinaryNode;
+			newNode->item = item;
+			newNode->left = NULL;
+			newNode->right = NULL;
+			t = newNode;
+			cout << item << " has been added to the tree." << endl;
+		}
+		else if (item < t->item)
+		{
+			insert(t->left, item);  // insert in left subtree
+			t = rebalance(t);
+		}
+		else if (item > t->item)
+		{
+			insert(t->right, item); // insert in right subtree
+			t = rebalance(t);
+		}
+		else
+		{
+			cout << "Item already exists in tree. Item cannot be added to the tree." << endl;
+			return;
+		}
+}
+
+
+//OPTION 3 - REMOVE ITEM  
 // delete an item from the binary search tree
 void BST::remove(ItemType value)
 {
@@ -318,6 +327,7 @@ void BST::remove(ItemType value)
 	else
 		remove(root, value);
 }
+
 
 void BST::remove(BinaryNode* &t, ItemType value)
 {
@@ -433,6 +443,8 @@ void BST::remove(BinaryNode* &t, ItemType value)
 	
 }
 
+
+//OPTION 4 - DISPLAY VALUES IN ASCENDING ORDER 
 // traverse the binary search tree in inorder
 void BST::inorder()
 {
@@ -453,6 +465,7 @@ void BST::inorder(BinaryNode* t)
 	else
 		return;					//NEW LINE
 }
+
 // traverse the binary search tree in preorder
 void BST::preorder()
 {
@@ -491,6 +504,78 @@ void BST::postorder(BinaryNode* t)
 	}
 }
 
+
+//OPTION 5 - DISPLAY VALUE IN KTH NODE (USING QUEUES)
+//kth node
+void BST::levelOrder(int target)
+{
+	levelOrder(root, target);
+}
+
+void BST::levelOrder(BinaryNode* t, int target)
+{
+	int rear, front;
+	struct BinaryNode **queue = createQueue(&front, &rear);
+	struct BinaryNode *temp_node = t;
+	int count = 0;
+	while (temp_node)
+	{
+		count++;
+		if (target == count)
+		{
+			cout << temp_node->item;
+			break;
+			cout << "Enter the number within the number of node.";
+			break;
+		}
+
+
+		/*Enqueue left child */
+		if (temp_node->left)
+			enQueue(queue, &rear, temp_node->left);
+
+		/*Enqueue right child */
+		if (temp_node->right)
+			enQueue(queue, &rear, temp_node->right);
+
+		/*Dequeue node and make it temp_node*/
+		temp_node = deQueue(queue, &front);
+
+	}
+}
+
+BinaryNode** BST::createQueue(int *front, int *rear)
+{
+	BinaryNode** queue =
+		(BinaryNode**)malloc(sizeof(BinaryNode*)*MAX_Q_SIZE);
+
+	*front = *rear = 0;
+	return queue;
+}
+
+void  BST::enQueue(BinaryNode **queue, int *rear, BinaryNode *new_node)
+{
+	queue[*rear] = new_node;
+	(*rear)++;
+}
+
+BinaryNode* BST::deQueue(BinaryNode **queue, int *front)
+{
+	(*front)++;
+	return queue[*front - 1];
+}
+BinaryNode* BST::newNode(int data)
+{
+	struct BinaryNode* node = (BinaryNode*)
+		malloc(sizeof(BinaryNode));
+	node->item = data;
+	node->left = NULL;
+	node->right = NULL;
+
+	return(node);
+}
+
+//OPTION 6 - CHECK IF TREE IS BALANCED 
 // compute the height of the binary search tree
 int BST::getHeight()
 {
@@ -549,19 +634,6 @@ int BST::heightDiff(BinaryNode* t)
 	return (getHeight(t->left) - getHeight(t->right));
 }
 
-// count the number of nodes in the binary search tree
-int BST::countNodes()
-{
-	return countNodes(root);
-}
-
-int BST::countNodes(BinaryNode* t)
-{
-	if (t == NULL)
-		return 0;
-	else
-		return 1 + countNodes(t->left) + countNodes(t->right);
-}
 
 // check if the binary search tree is balanced
 bool BST::isBalanced()
@@ -582,12 +654,51 @@ bool BST::isBalanced(BinaryNode* t)
 		return true;
 }
 
+
+//OPTION 7 - DISPLAY TREE 
+//display tree
+void BST::display()
+{
+	int level = getHeight();
+	if (level == 0)
+	{
+		cout << "There is no tree to be displayed. " << endl;
+	}
+	else
+		display(root, 1);
+}
+
+void BST::display(BinaryNode *ptr, int level)
+{
+	int i;
+	if (ptr != NULL)
+	{
+		display(ptr->right, level + 1);
+		cout << endl;
+		if (ptr == root)
+			cout << "root->";
+		else
+		{
+			for (i = 0; i < level && ptr != root; i++)
+				cout << "     ";
+		}
+		cout << ptr->item;
+		display(ptr->left, level + 1);
+	}
+}
+
+
+
 // check if the binary search tree is empty
 bool BST::isEmpty()
 {
 	return (root == NULL);
 }
 
+
+
+
+/*
 void BST::nodeK(int k)
 {
 	//dynamic queue 
@@ -626,37 +737,31 @@ void BST::nodeK(int k)
 		front += 1;
 	}
 }
+*/
 
-//display tree
-void BST::display()
+
+
+
+
+
+
+
+// count the number of nodes in the binary search tree
+int BST::countNodes()
 {
-	int level = getHeight();
-	if (level == 0)
-	{
-		cout << "There is no tree to be displayed. " << endl;
-	}
+	return countNodes(root);
+}
+
+int BST::countNodes(BinaryNode* t)
+{
+	if (t == NULL)
+		return 0;
 	else
-		display(root, 1);
+		return 1 + countNodes(t->left) + countNodes(t->right);
 }
 
-void BST::display(BinaryNode *ptr, int level)
-{
-	int i;
-	if (ptr != NULL)
-	{
-		display(ptr->right, level + 1);
-		cout << endl;
-		if (ptr == root)
-			cout << "root->";
-		else
-		{
-			for (i = 0; i < level && ptr != root; i++)
-				cout << "     ";
-		}
-		cout << ptr->item;
-		display(ptr->left, level + 1);
-	}
-}
+
+
 
 /*
 void BST::printLevel(Queue &q)

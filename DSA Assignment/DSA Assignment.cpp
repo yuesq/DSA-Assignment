@@ -1,3 +1,5 @@
+// DSA Assignment.cpp : Defines the entry point for the console application.
+
 //Jessica Das Roy 
 //S10171178
 //ISF02
@@ -8,12 +10,12 @@
 //ISF02
 //PO2
 
-// DSA Assignment.cpp : Defines the entry point for the console application.
+
 #pragma once
 #include "stdafx.h"
 #include <iostream>
 #include "BST.h"
-//#include "Queue.h"
+
 
 using namespace std;
 
@@ -151,6 +153,7 @@ void opt4() //display values in ascending order
 	bst.inorder();
 }
 
+/*
 void opt5() //display value in node k 
 {
 	// store the total number of nodes in var
@@ -190,6 +193,17 @@ void opt5() //display value in node k
 	{
 
 	}
+}
+*/
+
+
+//kth node
+void opt5() //display value in node k
+{
+	int k;
+	cout << "Enter the node number u wna see: ";
+	cin >> k;
+	bst.levelOrder(k);
 }
 
 void opt6()	//check if tree is balanced

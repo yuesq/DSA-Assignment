@@ -93,6 +93,15 @@ public:
 	void display();
 	void display(BinaryNode *ptr, int level);
 
+	//kth node
+	void BST::levelOrder(int target);
+	void BST::levelOrder(BinaryNode* n, int target);
+
+	BinaryNode** BST::createQueue(int *front, int *rear);
+	void BST::enQueue(BinaryNode **queue, int *rear, BinaryNode *new_node);
+	BinaryNode* BST::deQueue(BinaryNode **queue, int *front);
+	BinaryNode* BST::newNode(int data);
+
 	/*
 	void printLevel(Queue &q);
 	void printLevel(BinaryNode* t, Queue &q);
@@ -102,3 +111,4 @@ public:
 	*/
 
 };
+
