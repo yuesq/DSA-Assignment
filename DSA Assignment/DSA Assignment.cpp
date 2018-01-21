@@ -169,37 +169,31 @@ void opt4() //display values in ascending order
 //kth node
 void opt5() //display value in node k
 {
-	int k;
+	int k = 1;
 	int count;
 	count = bst.countNodes();
-
-	if (count != 0)
+	bool empty = bst.isEmpty();
+	bool success = (k > 0 && k <= count);
+	
+	if (empty)
+	{
+		cout << "There are no items in the tree." << endl;
+	}
+	
+	LOOP: do
 	{
 		cout << "There are " << count << " nodes in the tree." << endl;
 		cout << "Enter any number between 1 and " << count << " to display the value within the node: ";
+		cin.fail();
+		cin.clear();
+		cin.ignore();
 		cin >> k;
-		bool success = (k > 0 && k <= count);
-		
-		if (!success)
-		{
-			while (!success)
-			{
-				cout << "You have entered an invalid number." << endl;
-				cin.fail();
-				cin.clear();
-				cin.ignore();
 
-				cout << "There are " << count << " nodes in the tree." << endl;
-				cout << "Enter any number between 1 and " << count << " to display the value within the node: ";
-				cin >> k;
-			}
-		}
+	} while (!success);
 
-		bst.levelOrder(k);
-	}
-	else
+	if (success)
 	{
-		cout << "Sorry, there are no items in the tree." << endl;
+		bst.levelOrder(k);
 	}
 
 }
