@@ -329,7 +329,6 @@ void BST::remove(BinaryNode* &t, ItemType value)
 		if (value == current->item)
 		{
 			found = true;
-
 		}
 		else
 		{
@@ -349,12 +348,16 @@ void BST::remove(BinaryNode* &t, ItemType value)
 
 	if (found)
 	{
+		root = rebalance();
 		// -----------------------  case 1 : node is a leaf ------------------------
 		if (current->left == NULL && current->right == NULL)
 		{
 			if (current == t)	// node to be deleted is a root
+			{
 				t = NULL;
+			}
 			else
+			{
 				if (isLeftChild)
 				{
 					parent->left = NULL;
@@ -363,54 +366,67 @@ void BST::remove(BinaryNode* &t, ItemType value)
 				{
 					parent->right = NULL;
 				}
-			//parent = rebalance();
+
+			}
+
 		}
 		else
 			// -----------------------  case 2 : node has only 1 child  ----------------
+		{
+
 			if (current->left == NULL)
 			{
 				if (current == t)
+				{
 					t = current->right;
+				}
 
 				else if (isLeftChild)
 				{
 					parent->left = current->right;
-					//parent = rebalance();
 				}
 				else
 				{
 					parent->right = current->right;
-					//parent = rebalance();
 				}
-				//parent = rebalance();
+
+
 			}
 
 			else if (current->right == NULL)
+			{
+				if (current == t)
 				{
-					if (current == t)
-						t = current->left;
-					else if (isLeftChild)
-						parent->left = current->left;
-					else
-						parent->right = current->left;
-					//parent = rebalance();
+					t = current->left;
 				}
+				else if (isLeftChild)
+					parent->left = current->left;
 				else
-					// -----------------------  case 3 : node has 2 children  ------------------
-				{
-					// find the successor ( rightmost child in the node’s left subtree)
-					BinaryNode* successor = current->left;
-					while (successor->right != NULL)
-						successor = successor->right;
-					// replace the node’s item with that of the successor
-					int n = successor->item;
-					// delete the successor (either case 1 or case 2)
-					remove(t, n);
-					// replace the node’s item with that of the successor
-					current->item = n;
-				}
+					parent->right = current->left;
 
+			}
+			else
+				// -----------------------  case 3 : node has 2 children  ------------------
+			{
+				// find the successor ( rightmost child in the node’s left subtree)
+				BinaryNode* successor = current->left;
+				while (successor->right != NULL)
+					successor = successor->right;
+				// replace the node’s item with that of the successor
+				int n = successor->item;
+				// delete the successor (either case 1 or case 2)
+				remove(t, n);
+				// replace the node’s item with that of the successor
+				current->item = n;
+			}
+		}
 	}
+
+	else
+	{
+		cout << "Sorry, the item does not exist in the tree." << endl;
+	}
+	
 }
 
 // traverse the binary search tree in inorder
