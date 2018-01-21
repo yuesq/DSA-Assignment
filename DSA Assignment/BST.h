@@ -1,11 +1,14 @@
 #pragma once
 // BST.h
-#include <string>
+
 #include "BinaryNode.h"
+<<<<<<< HEAD
 #include <unordered_map>
 #include <algorithm>
 #include <type_traits>
 //#include "Queue.h"
+=======
+>>>>>>> parent of c0e4265... remove was fixed
 
 class BST
 {
@@ -91,6 +94,7 @@ public:
 	// display the tree
 	void display();
 	void display(BinaryNode *ptr, int level);
+<<<<<<< HEAD
 
 	/*
 	void printLevel(Queue &q);
@@ -99,5 +103,7 @@ public:
 	void BST::printLevelOrder(int depth);
 	void BST::printLevelOrder(BinaryNode* t, int depth);
 	*/
+=======
+>>>>>>> parent of c0e4265... remove was fixed
 	
 };

@@ -14,7 +14,10 @@
 #include <iostream>
 #include <string>
 #include "BST.h"
+<<<<<<< HEAD
 //#include "Queue.h"
+=======
+>>>>>>> parent of c0e4265... remove was fixed
 using namespace std;
 
 BST bst;
@@ -156,7 +159,10 @@ void opt5() //display value in node k
 {
 	// store the total number of nodes in var
 	int count;
+<<<<<<< HEAD
 	//Queue q;
+=======
+>>>>>>> parent of c0e4265... remove was fixed
 	count = bst.countNodes();
 
 	// intialise int value of k
@@ -170,8 +176,8 @@ void opt5() //display value in node k
 	cout << "Enter a number between 1 and " << count << endl;
 	cout << "Which node would you like to find? " << endl;
 	cin >> k;
-	bool fail = (k < 0 || k >= count);
-	while (fail)
+	
+	while (k <= 0 || k > count)
 	{
 		k = 0;
 		cin.fail();
@@ -181,6 +187,7 @@ void opt5() //display value in node k
 		cin >> k;
 	}
 
+<<<<<<< HEAD
 	if (!fail)
 	{
 		bst.nodeK(k);
@@ -188,6 +195,9 @@ void opt5() //display value in node k
 		//cout << "The value of the " << k << "th node is = " << q.findK(k) << endl;
 	}
 
+=======
+	bst.nodeK(k);
+>>>>>>> parent of c0e4265... remove was fixed
 }
 
 

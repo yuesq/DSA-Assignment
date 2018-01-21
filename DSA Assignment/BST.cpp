@@ -2,7 +2,10 @@
 #pragma once
 #include "stdafx.h"
 #include<iostream>
+<<<<<<< HEAD
 //#include <sstream>
+=======
+>>>>>>> parent of c0e4265... remove was fixed
 #include <string>
 #include <cmath>
 #include <cstddef>  // for NULL
@@ -10,8 +13,11 @@
 #include <algorithm>
 #include <vector>
 #include "BST.h"
+<<<<<<< HEAD
 //#include "Queue.h"
 
+=======
+>>>>>>> parent of c0e4265... remove was fixed
 
 using namespace std;
 
@@ -58,23 +64,15 @@ void BST::initialise(ItemType value)
 	//m is the sum of all node values in the bst
 	int m = 0;
 
-	if (value < 0 && value % 1 != 0)
+	for (int i = 1; m <= value; i++)
 	{
-		cout << "Value is invalid." << endl;
+		//calculate values
+		// insert values into tree
+		cout << "value in tree = " << i << endl;
+		insert(i);
+		m += i;
 	}
-
-	else
-	{
-		for (int i = 1; m <= value; i++)
-		{
-			//calculate values
-			// insert values into tree
-			cout << "value in tree = " << i << endl;
-			insert(i);
-			m += i;
-		}
-		cout << "sum is = " << m << endl;
-	}
+	cout << "sum is = " << m << endl;
 
 }
 
@@ -151,12 +149,12 @@ BinaryNode* BST::search(BinaryNode* root, ItemType value)
 {
 	if (root == NULL)	// item not found
 	{
-		cout << "The item " << value << " was not found" << endl;
+		cout << "The item was not found" << endl;
 		return NULL;
 	}
 	else if (root->item == value) //item found
 	{
-		cout << "The item " << value << " was found." << endl;
+		cout << "The item was found." << endl;
 		return root;
 	}
 
@@ -214,7 +212,7 @@ void BST::insert(BinaryNode* &t, ItemType item)
 		}
 		else
 		{
-			cout << "Item already exists in tree. It cannot be added to the tree." << endl;
+			cout << "Item already exists in tree. Item cannot be added to the tree." << endl;
 			return;
 		}
 }
@@ -380,7 +378,6 @@ void BST::remove(BinaryNode* &t, ItemType value)
 
 			}
 
-			parent = rebalance();
 		}
 		else
 			// -----------------------  case 2 : node has only 1 child  ----------------
@@ -431,7 +428,6 @@ void BST::remove(BinaryNode* &t, ItemType value)
 				// replace the node’s item with that of the successor
 				current->item = n;
 			}
-			root = rebalance();
 		}
 		cout << value << " has been removed from the tree." << endl;
 	}
@@ -567,7 +563,7 @@ int BST::countNodes()
 
 int BST::countNodes(BinaryNode* t)
 {
-	if (isEmpty())
+	if (t == NULL)
 		return 0;
 	else
 		return 1 + countNodes(t->left) + countNodes(t->right);
@@ -668,6 +664,7 @@ void BST::display(BinaryNode *ptr, int level)
 	}
 }
 
+<<<<<<< HEAD
 /*
 void BST::printLevel(Queue &q)
 {
@@ -727,3 +724,6 @@ void BST::printLevelOrder(BinaryNode* root, int depth) {
 	}
 }
 */
+=======
+
+>>>>>>> parent of c0e4265... remove was fixed
