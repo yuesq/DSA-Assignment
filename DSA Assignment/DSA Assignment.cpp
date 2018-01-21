@@ -45,12 +45,9 @@ int main()
 	cout << "Enter option: ";
 	cin >> opt;
 
-	while (opt != 0 || !(cin >> opt))
+	while (opt != 0)
 	{
 		displayMenu();
-		cin.clear();
-		cin.ignore();
-		cin.fail();
 		cout << "Enter option: ";
 		cin >> opt;
 
@@ -103,10 +100,6 @@ int main()
 			opt9();
 		}
 
-		else if (!cin >> opt)
-		{
-			cout << "Sorry, you have entered an invalid option. Please try again." << endl;
-		}
 
 		else
 		{
@@ -183,9 +176,38 @@ void opt4() //display values in ascending order
 void opt5() //display value in node k
 {
 	int k;
-	cout << "Enter the node number (K) to display value in it: ";
-	cin >> k;
-	bst.levelOrder(k);
+	int count;
+	count = bst.countNodes();
+
+	if (count != 0)
+	{
+		cout << "There are " << count << " nodes in the tree." << endl;
+		cout << "Enter any number between 1 and " << count << " to display the value within the node: ";
+		cin >> k;
+		bool success = (k > 0 && k <= count);
+		
+		if (!success)
+		{
+			while (!success)
+			{
+				cout << "You have entered an invalid number." << endl;
+				cin.fail();
+				cin.clear();
+				cin.ignore();
+
+				cout << "There are " << count << " nodes in the tree." << endl;
+				cout << "Enter any number between 1 and " << count << " to display the value within the node: ";
+				cin >> k;
+			}
+		}
+
+		bst.levelOrder(k);
+	}
+	else
+	{
+		cout << "Sorry, there are no items in the tree." << endl;
+	}
+
 }
 
 void opt6()	//check if tree is balanced

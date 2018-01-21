@@ -29,7 +29,7 @@ public:
 
 	// search function used for remove function checking
 	BinaryNode* search2(ItemType value);
-	BinaryNode* search2(BinaryNode* root, ItemType value);
+	BinaryNode* search2(BinaryNode* t, ItemType value);
 
 	// initialise a data array
 	void initialise(ItemType value);
