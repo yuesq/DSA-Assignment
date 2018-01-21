@@ -14,6 +14,7 @@
 #include <iostream>
 #include <string>
 #include "BST.h"
+#include "Queue.h"
 using namespace std;
 
 BST bst;
@@ -155,6 +156,7 @@ void opt5() //display value in node k
 {
 	// store the total number of nodes in var
 	int count;
+	Queue q;
 	count = bst.countNodes();
 
 	// intialise int value of k
@@ -168,8 +170,8 @@ void opt5() //display value in node k
 	cout << "Enter a number between 1 and " << count << endl;
 	cout << "Which node would you like to find? " << endl;
 	cin >> k;
-	
-	while (k <= 0 || k > count)
+	bool fail = (k < 0 || k >= count);
+	while (fail)
 	{
 		k = 0;
 		cin.fail();
@@ -179,7 +181,13 @@ void opt5() //display value in node k
 		cin >> k;
 	}
 
-	bst.nodeK(k);
+	if (!fail)
+	{
+		bst.printLevel(q);
+		cout << "The value of the " << k << "th node is = " << q.findK(k) << endl;
+	}
+
+	//bst.nodeK(k);
 }
 
 

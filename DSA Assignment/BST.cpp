@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include<iostream>
+#include <sstream>
 #include <string>
 #include <cmath>
 #include <cstddef>  // for NULL
@@ -9,6 +10,8 @@
 #include <algorithm>
 #include <vector>
 #include "BST.h"
+#include "Queue.h"
+
 
 using namespace std;
 
@@ -55,15 +58,23 @@ void BST::initialise(ItemType value)
 	//m is the sum of all node values in the bst
 	int m = 0;
 
-	for (int i = 1; m <= value; i++)
+	if (value < 0 && value % 1 != 0)
 	{
-		//calculate values
-		// insert values into tree
-		cout << "value in tree = " << i << endl;
-		insert(i);
-		m += i;
+		cout << "Value is invalid." << endl;
 	}
-	cout << "sum is = " << m << endl;
+
+	else
+	{
+		for (int i = 1; m <= value; i++)
+		{
+			//calculate values
+			// insert values into tree
+			cout << "value in tree = " << i << endl;
+			insert(i);
+			m += i;
+		}
+		cout << "sum is = " << m << endl;
+	}
 
 }
 
@@ -140,12 +151,12 @@ BinaryNode* BST::search(BinaryNode* root, ItemType value)
 {
 	if (root == NULL)	// item not found
 	{
-		cout << "The item was not found" << endl;
+		cout << "The item " << value << " was not found" << endl;
 		return NULL;
 	}
 	else if (root->item == value) //item found
 	{
-		cout << "The item was found." << endl;
+		cout << "The item " << value << " was found." << endl;
 		return root;
 	}
 
@@ -203,7 +214,7 @@ void BST::insert(BinaryNode* &t, ItemType item)
 		}
 		else
 		{
-			cout << "Item already exists in tree. Item cannot be added to the tree." << endl;
+			cout << "Item already exists in tree. It cannot be added to the tree." << endl;
 			return;
 		}
 }
@@ -369,6 +380,7 @@ void BST::remove(BinaryNode* &t, ItemType value)
 
 			}
 
+			parent = rebalance();
 		}
 		else
 			// -----------------------  case 2 : node has only 1 child  ----------------
@@ -419,6 +431,7 @@ void BST::remove(BinaryNode* &t, ItemType value)
 				// replace the node’s item with that of the successor
 				current->item = n;
 			}
+			root = rebalance();
 		}
 	}
 
@@ -553,7 +566,7 @@ int BST::countNodes()
 
 int BST::countNodes(BinaryNode* t)
 {
-	if (t == NULL)
+	if (isEmpty())
 		return 0;
 	else
 		return 1 + countNodes(t->left) + countNodes(t->right);
@@ -654,4 +667,61 @@ void BST::display(BinaryNode *ptr, int level)
 	}
 }
 
+void BST::printLevel(Queue &q)
+{
+	return printLevel(root, q);
+}
+
+void BST::printLevel(BinaryNode *t, Queue &q) {
+	int h = getHeight(t);
+	for (int i = 1; i <= h; i++)
+		printGivenLevel(t, i, q);
+}
+
+string printTree(BinaryNode *root, int level, string gap) {
+	if (level == 1) {
+		if (root == 0) {
+			return gap + "-" + gap;
+		}
+		stringstream out;
+		out << root->item;
+		return gap + out.str() + gap;
+	}
+	else if (level>1) {
+		string leftStr = printTree(root ? root->left : 0, level - 1, gap);
+		string rightStr = printTree(root ? root->right : 0, level - 1, gap);
+
+		return leftStr + " " + rightStr;
+	}
+	else return "";
+}
+
+void BST::printGivenLevel(BinaryNode* t, int level, Queue &q)
+{
+	if (t == NULL)
+		return;
+	if (level == 1)
+	{
+		q.enqueue(t->item);
+	}
+	else if (level > 1)
+	{
+		printGivenLevel(t->left, level - 1, q);
+		printGivenLevel(t->right, level - 1, q);
+	}
+}
+void BST::printLevelOrder(int depth) {
+	printLevelOrder(root, depth);
+}
+
+void BST::printLevelOrder(BinaryNode* root, int depth) {
+	for (int i = 1; i <= depth; i++) {
+		string gap = "";
+		for (int j = 0; j<pow(2, depth - i) - 1; j++) {
+			gap += " ";
+		}
+		string levelNodes = printTree(root, i, gap);
+		cout << levelNodes << endl;
+	}
+}
 

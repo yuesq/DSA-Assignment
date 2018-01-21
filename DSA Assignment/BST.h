@@ -1,7 +1,11 @@
 #pragma once
 // BST.h
-
+#include <string>
 #include "BinaryNode.h"
+#include <unordered_map>
+#include <algorithm>
+#include <type_traits>
+#include "Queue.h"
 
 class BST
 {
@@ -87,5 +91,11 @@ public:
 	// display the tree
 	void display();
 	void display(BinaryNode *ptr, int level);
+
+	void printLevel(Queue &q);
+	void printLevel(BinaryNode* t, Queue &q);
+	void BST::printGivenLevel(BinaryNode* t, int level, Queue &q);
+	void BST::printLevelOrder(int depth);
+	void BST::printLevelOrder(BinaryNode* t, int depth);
 	
 };
